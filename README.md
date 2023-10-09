@@ -29,9 +29,6 @@ This project setting up a website for the Thomas Batterman Mental Health Project
 - Contact form
 - Social media link-outs (i.e. Instagram)
 - Instructions for maintaining domain registration
-
-**Stretch Goals**
-
 - Photo gallery (instagram feed)
 - ~~Logo (re)design~~
 
