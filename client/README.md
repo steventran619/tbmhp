@@ -1,23 +1,28 @@
 # TBMHP Client
+Preview Link:
 
-To get started run the following:
+https://steventran619.github.io/tbmhp/
+
+## To get started run the following:
 ```
 cd client
 npm install
 npm run dev
 ```
 
-To Build Locally
+## Build Locally
 ```
 npm run build
 ```
 
-To Test Build Locally
+## Test Build Locally
 ```
 npm run preview
 ```
 
-Deploy to GitHub Pages
+## Deploy to GitHub Pages
+**WARNING this will replace the deployed site with the latest local build**
 ```
 npm run deploy
 ```
+](https://steventran619.github.io/tbmhp/)https://steventran619.github.io/tbmhp/
