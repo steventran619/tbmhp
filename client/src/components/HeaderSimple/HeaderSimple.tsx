@@ -1,14 +1,19 @@
 import { useState } from 'react';
-import { Container, Group, Burger } from '@mantine/core';
+import { Container, Group, Burger, Image } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { MantineLogo } from '@mantine/ds';
+import logoImage from '../../images/logo.png';
 import classes from './HeaderSimple.module.css';
 
 const links = [
-  { link: '/about', label: 'Features' },
-  { link: '/pricing', label: 'Pricing' },
-  { link: '/learn', label: 'Learn' },
-  { link: '/community', label: 'Community' },
+  { link: '/home', label: 'Home' },
+  { link: '/aboutus', label: 'About Us' },
+  { link: '/abouttom', label: 'About Tom' },
+  { link: '/boardofdirectors', label: 'Board of Directors' },
+  { link: '/events', label: 'Events' },
+  { link: '/gallery', label: 'Gallery' },
+  { link: '/donate', label: 'Donate' },
+  { link: '/contact', label: 'Contact' },
 ];
 
 export function HeaderSimple() {
@@ -32,13 +37,17 @@ export function HeaderSimple() {
 
   return (
     <header className={classes.header}>
-      <Container size="md" className={classes.inner}>
-        <MantineLogo size={28} />
+      <Container size="lg" className={classes.inner}>
+        {/* <MantineLogo size={28} /> */}
+        <Image src={logoImage} alt="logo" w="180" fit="contain" />
+        <div className={classes.spacer} />
         <Group gap={5} visibleFrom="xs">
           {items}
         </Group>
 
         <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
+        <Image src={logoImage} alt="logo" width={200} height={200} />
+
       </Container>
     </header>
   );
