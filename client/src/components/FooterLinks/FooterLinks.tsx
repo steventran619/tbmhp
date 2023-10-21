@@ -25,10 +25,9 @@ const data = [
   {
     title: 'Community',
     links: [
-      { label: 'Join Discord', link: '#' },
-      { label: 'Follow on Twitter', link: '#' },
+      { label: 'Follow on Facebook', link: 'https://www.facebook.com/people/Thomas-Batterman-Mental-Health-Project/100094105658144/' },
+      { label: 'Instagram Feed', link: 'https://www.instagram.com/tb.mhp/' },
       { label: 'Email newsletter', link: '#' },
-      { label: 'GitHub discussions', link: '#' },
     ],
   },
 ];
@@ -41,7 +40,7 @@ export function FooterLinks() {
         className={classes.link}
         component="a"
         href={link.link}
-        onClick={(event) => event.preventDefault()}
+        // onClick={(event) => event.preventDefault()}
       >
         {link.label}
       </Text>
@@ -68,7 +67,7 @@ export function FooterLinks() {
       </Container>
       <Container className={classes.afterFooter}>
         <Text c="dimmed" size="sm">
-          © 2023 TBMHP.mantine.dev. All rights reserved.
+          © 2023 TBMHP.CS467.dev. All rights reserved.
         </Text>
 
         <Group gap={0} className={classes.social} justify="flex-end" wrap="nowrap">
@@ -78,9 +77,11 @@ export function FooterLinks() {
           <ActionIcon size="lg" color="gray" variant="subtle">
             <IconBrandYoutube style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
           </ActionIcon>
-          <ActionIcon size="lg" color="gray" variant="subtle">
-            <IconBrandInstagram style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
-          </ActionIcon>
+          <a href="https://www.instagram.com/tb.mhp/" target="_blank" rel="noopener noreferrer">
+            <ActionIcon size="lg" color="gray" variant="subtle">
+              <IconBrandInstagram style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
+            </ActionIcon>
+          </a>
         </Group>
       </Container>
     </footer>
