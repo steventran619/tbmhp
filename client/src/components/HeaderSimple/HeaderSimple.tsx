@@ -46,8 +46,6 @@ export function HeaderSimple() {
         </Group>
 
         <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
-        <Image src={logoImage} alt="logo" width={200} height={200} />
-
       </Container>
     </header>
   );
