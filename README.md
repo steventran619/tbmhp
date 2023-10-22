@@ -1,3 +1,8 @@
+<p align="center">
+  <a href="https://www.tbmhp.org">
+  <img src="client/src/images/logo.png" alt="logo" width="400">
+</p>
+
 # Thomas Batterman Mental Health Project (TBMHP)
 
 This project setting up a website for the Thomas Batterman Mental Health Project ([TBMHP]), a non profit organization focused on improving accessibility to mental health services. The website will consist of  roughly ~8 pages of content. The project will focus on page layout, design, and navigation, meeting accessibility needs (WCAG, etc.), payment processing through the website, link-outs, and possible logo redesign. 
