@@ -24,9 +24,9 @@ const data = [
   {
     title: 'Community',
     links: [
-      { label: 'Follow on Facebook', link: 'https://www.facebook.com/people/Thomas-Batterman-Mental-Health-Project/100094105658144/' },
-      { label: 'Instagram Feed', link: 'https://www.instagram.com/tb.mhp/' },
-      { label: 'Email newsletter', link: '#' },
+      { label: 'Facebook', link: 'https://www.facebook.com/people/Thomas-Batterman-Mental-Health-Project/100094105658144/' },
+      { label: 'Instagram', link: 'https://www.instagram.com/tb.mhp/' },
+      { label: 'Subscribe Newsletter', link: '#' },
     ],
   },
 ];
