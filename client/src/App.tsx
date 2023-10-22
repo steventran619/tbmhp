@@ -1,32 +1,48 @@
 import "@mantine/core/styles.css";
-import { MantineProvider, Text, Center, Box } from "@mantine/core";
+import { MantineProvider, Title, Text, Center, Box } from "@mantine/core";
 import { theme } from "./theme";
 import { HeaderSimple } from './components/HeaderSimple/HeaderSimple';
 import { FooterLinks } from './components/FooterLinks/FooterLinks';
+import { Home } from './pages/Home/Home';
+import { AboutTom } from './pages/AboutTom/AboutTom';
+import { AboutUs } from './pages/AboutUs/AboutUs';
+// import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 export default function App() {
-  return <MantineProvider theme={theme}>
-    <HeaderSimple />
+  return (
+    <Router>
 
-    <Center style={{ minHeight: '10vh' }}>
-      <Box>
-        <Text
-          size="xl"
-          fw={900}
-          variant="gradient"
-          gradient={{ from: 'lime', to: 'rgba(97, 43, 43, 1)', deg: 0 }}
-        >
-          Welcome to the TBMHP Application
-        </Text>
-        <br />
-        <Text>Built with in React (TSX) + Mantine</Text>
-        <Text>Built with in React (TSX) + Mantine</Text>
+      <MantineProvider theme={theme}>
+        <HeaderSimple />
+        <Center style={{ minHeight: '10vh' }}>
+          <Box>
+            <Title>
+              <Text
+                size="xl"
+                fw={900}
+                variant="gradient"
+                gradient={{ from: 'lime', to: 'rgba(97, 43, 43, 1)', deg: 0 }}>
+                Thomas Batterman Mental Health Project
+              </Text>
+            </Title>
 
-        <Text>Built with in React (TSX) + Mantine</Text>
+            <br />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/aboutus" element={<AboutUs />} />
+              <Route path="/abouttom" element={<AboutTom />} />
+              <Route path="/boardofdirectors" />
+              <Route path="/events" />
+              <Route path="/gallery"/>
+              <Route path="/donate" />
+              <Route path="/contact" />
+            </Routes>
+          </Box>
+        </Center>
 
-      </Box>
-    </Center>
-
-    <FooterLinks />
-  </MantineProvider>;
+        <FooterLinks />
+      </MantineProvider>;
+    </Router>
+  )
 }
