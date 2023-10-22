@@ -41,13 +41,12 @@ export function HeaderSimple() {
   return (
     <header className={classes.header}>
       <Container size="lg" className={classes.inner}>
-        {/* <MantineLogo size={28} /> */}
         <Image src={logoImage} alt="logo" w="180" fit="contain" />
         <div className={classes.spacer} />
         <Group gap={5} visibleFrom="xs">
           {items}
         </Group>
-
+        {/* TODO: Update burger content in mobile view */}
         <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
       </Container>
     </header>
