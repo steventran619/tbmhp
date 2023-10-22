@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Container, Group, Burger, Image } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { MantineLogo } from '@mantine/ds';
 import logoImage from '../../images/logo.png';
 import classes from './HeaderSimple.module.css';
+import { Link, useLocation } from "react-router-dom";
 
 const links = [
-  { link: '/home', label: 'Home' },
+  { link: '/', label: 'Home' },
   { link: '/aboutus', label: 'About Us' },
   { link: '/abouttom', label: 'About Tom' },
   { link: '/boardofdirectors', label: 'Board of Directors' },
@@ -20,19 +20,23 @@ export function HeaderSimple() {
   const [opened, { toggle }] = useDisclosure(false);
   const [active, setActive] = useState(links[0].link);
 
+  const location = useLocation();
+
+  // Update the active state based on the current location pathname
+  useEffect(() => {
+    const currentPath = location.pathname;
+    setActive(currentPath);
+  }, [location.pathname]);
+
   const items = links.map((link) => (
-    <a
+    <Link
       key={link.label}
-      href={link.link}
-      className={classes.link}
+      to={link.link}
+      className={`${classes.link} ${active === link.link ? "active" : ""}`}
       data-active={active === link.link || undefined}
-      onClick={(event) => {
-        event.preventDefault();
-        setActive(link.link);
-      }}
     >
       {link.label}
-    </a>
+    </Link>
   ));
 
   return (
