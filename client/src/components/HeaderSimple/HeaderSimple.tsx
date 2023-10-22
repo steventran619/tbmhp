@@ -19,7 +19,6 @@ const links = [
 export function HeaderSimple() {
   const [opened, { toggle }] = useDisclosure(false);
   const [active, setActive] = useState(links[0].link);
-
   const location = useLocation();
 
   // Update the active state based on the current location pathname
@@ -33,7 +32,7 @@ export function HeaderSimple() {
       key={link.label}
       to={link.link}
       className={`${classes.link} ${active === link.link ? "active" : ""}`}
-      data-active={active === link.link || undefined}
+      data-active={active === link.link || undefined} // used to highlight the active link
     >
       {link.label}
     </Link>
