@@ -12,7 +12,7 @@ const links = [
   { link: '/boardofdirectors', label: 'Board of Directors' },
   { link: '/events', label: 'Events' },
   { link: '/gallery', label: 'Gallery' },
-  { link: '/donate', label: 'Donate' },
+  { link: 'https://www.paypal.com/donate/?hosted_button_id=9G79KGUBH7RUW', label: 'Donate' },
   { link: '/contact', label: 'Contact' },
 ];
 

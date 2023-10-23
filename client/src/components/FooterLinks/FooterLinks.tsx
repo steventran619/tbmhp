@@ -18,7 +18,7 @@ const data = [
     links: [
       { label: 'Events', link: '#' },
       { label: 'Gallery', link: '#' },
-      { label: 'Donate', link: '#' },
+      { label: 'Donate', link: 'https://www.paypal.com/donate/?hosted_button_id=9G79KGUBH7RUW' },
     ],
   },
   {
