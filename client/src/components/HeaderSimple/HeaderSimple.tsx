@@ -41,7 +41,9 @@ export function HeaderSimple() {
   return (
     <header className={classes.header}>
       <Container size="lg" className={classes.inner}>
-        <Image src={logoImage} alt="logo" w="180" fit="contain" />
+        <Link to={'/'}>
+          <Image src={logoImage} alt="logo" w="180" fit="contain" />
+        </Link>
         <div className={classes.spacer} />
         <Group gap={5} visibleFrom="xs">
           {items}
