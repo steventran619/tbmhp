@@ -40,7 +40,7 @@
     flex-wrap: wrap;
   
     @media (max-width: $mantine-breakpoint-sm) {
-      display: none;
+      /* display: none; */
     }
   }
   

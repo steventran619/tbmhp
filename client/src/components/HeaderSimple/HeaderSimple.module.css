@@ -1,16 +1,18 @@
 .header {
-    height: rem(56px);
-    margin-bottom: rem(120px);
+    height: rem(106px);
+    margin-bottom: rem(10px);
     background-color: var(--mantine-color-body);
     border-bottom: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
 }
 
 .inner {
-    height: rem(56px);
+    height: rem(100px);
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
 }
+
+
 
 .link {
     display: block;
@@ -27,7 +29,7 @@
     }
 
     [data-mantine-color-scheme] &[data-active] {
-        background-color: var(--mantine-color-blue-filled);
+        background-color: var(--mantine-color-green-9);
         color: var(--mantine-color-white);
     }
 }
