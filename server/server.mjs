@@ -1,38 +1,26 @@
 
 import dotenv from 'dotenv';
 import express from 'express';
-// require('dotenv').config();
-import { Image } from './images-model.mjs';
 import mongoose from 'mongoose';
 import axios from 'axios';
+import { Datum, Paging, RootMedia, ChildrenSchema, Image } from './images-model.mjs';
 
-// const express = require('express');
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 const instagramApiURL = process.env.INSTAGRAM_API_URL;
 const instagramAccessToken = process.env.INSTAGRAM_ACCESS_TOKEN;
 const mongodbConnectString = process.env.MONGODB_CONNECT_STRING;
+const router = express.Router();
 
-function getInstagramMedia() {
-    // Check Fetch URL
-    // console.log("API URL", `${instagramApiURL}/me/media?fields=id,media_type,media_url,children{id,media_type,media_url,timestamp},caption,timestamp&access_token=${instagramAccessToken}`);
+const headerConfig = {
+    headers: {
+        'Accept': 'application/json', // Specify that you expect JSON
+        // Add any other headers as needed
+    },
+};
 
-    axios.get(`${instagramApiURL}/me/media?fields=id,media_type,media_url,children{id,media_type,media_url,timestamp},caption,timestamp&access_token=${instagramAccessToken}`)
-        .then(function (response) {
-            // handle success
-            console.log(response.data);
-            return response.data;
-        })
-        .catch(function (error) {
-            // handle error
-            console.log(error);
-            return error;
-        })
-        .then(function () {
-            // always executed
-        });
-}
+app.use(express.json());  // to support JSON-encoded bodies
 
 // CREATE model *****************************************
 const createImage = async (media_id, media_type, media_url, caption, date) => {
@@ -45,96 +33,96 @@ const createImage = async (media_id, media_type, media_url, caption, date) => {
     });
     return image.save();
 }
+// TODO: Learn how to use map or filter nested objects?
 
-async function main() {
-    console.log('Connect string:\n\t', mongodbConnectString)
-    await mongoose.connect(`${mongodbConnectString}`);
-    app.use(express.json());  // to support JSON-encoded bodies
-
-
-    // fetch data from instagram
-    const instagramData = await getInstagramMedia();
-
-
-    const kittySchema = new mongoose.Schema({
-        name: String
-    });
-
-    const imageSchema = mongoose.Schema({
-        media_id: { type: Number, required: true },
-        media_type: { type: String, required: true },
-        media_url: { type: String, required: true },
-        caption: { type: String, required: false },
-        date: { type: Date, required: true }
-    });
-
-    const Image = mongoose.model("Image", imageSchema);
-
-    // CREATE model *****************************************
-    const createImage = async (media_id, media_type, media_url, caption, date) => {
-        const image = new Image({
-            media_id: media_id,
-            media_type: media_type,
-            media_url: media_url,
-            caption: caption,
-            date: date
-        });
-        return image.save();
-    }
-
-    const testImage = new Image({
-        media_id: 12345,
-        media_type: 'IMAGE',
-        media_url: "https://fastly.picsum.photos/id/962/300/300.jpg?hmac=hP9T9VNlpDM329RHKCi7z4xlwmcGHk0vESh2oF1MvWY",
-        date: "2023-10-27T14:42:23+0000"
-    });
-    await testImage.save();
-
-    // kittySchema.methods.speak = function speak() {
-    //     const greeting = this.name
-    //     ? 'Meow name is ' + this.name
-    //     : 'I don\'t have a name';
-    //     console.log(greeting);
-    // };
-
-    // // Needs to recompile the model
-    // const Kitten = mongoose.model('Kitten', kittySchema);
-
-    // const silence = new Kitten({ name: 'Silence' });
-    // console.log(silence.name); // 'Silence'
-
-    // // NOTE: methods must be added to the schema before compiling it with mongoose.model()
-
-
-    // const fluffy = new Kitten({ name: 'fluffy' });
-    // await fluffy.save();
-    // fluffy.speak(); // "Meow name is fluffy"
-
-    // const kittens = await Kitten.find();
-    // console.log(kittens);
-
-    // await Kitten.find({ name: /^fluff/ });
-
+function filterImages(data) {
 }
 
-app.listen(PORT || 3001, () => {
-    console.log(`Server listening on http://localhost:${PORT}...`);
-    main().catch(err => console.log(err));
-    // const imagePost = createImage({
-    //     media_id: 12345,
-    //     media_type: 'IMAGE',
-    //     media_url: "https://fastly.picsum.photos/id/962/300/300.jpg?hmac=hP9T9VNlpDM329RHKCi7z4xlwmcGHk0vESh2oF1MvWY",
-    //     date: "2023-10-27T14:42:23+0000"
-    // })
-    // console.log(imagePost)
+// Drops a collectionName from the Instagram-media database (based off ConnectString)
+async function dropCollection(collectionName) {
+    await mongoose.connect(`${mongodbConnectString}`);
+
+    try {
+        await mongoose.connection.collections[collectionName].drop();
+        console.log(`* Collection ${collectionName} dropped`);
+    } catch (error) {
+        console.error('! MongoDB drop collection error:', error);
+    } finally {
+        await mongoose.disconnect();
+    }
+}
+
+// TODO: Create a function to insert the Media and Images into the MongoDB database
+// This is used for fetching from Instagram and inserting into MongoDB
+async function UpdateMediaInMongoDB() {
+    await dropCollection('images');
+    await dropCollection('media-all');
+
+    await mongoose.connect(`${mongodbConnectString}`);
+
+    const database = mongoose.connection;
+    // const collection = database.collection('images');
+    try {
+        const response = await axios.get(`${instagramApiURL}/me/media?fields=id,media_type,media_url,children{id,media_type,media_url,timestamp},caption,timestamp&access_token=${instagramAccessToken}`, headerConfig)
+        let dataToInsert = response.data;
+
+        // Save Raw Media in MongoDB
+        const result = await RootMedia.create(dataToInsert);
+        console.log('* Document inserted with _id:', result.insertedId);
+
+        // Filters through the Me/Media for only Images
+        const filteredImages = [];
+        for (const obj of dataToInsert.data) {
+            if (obj.media_type === 'IMAGE') {
+                filteredImages.push(obj);
+            }
+            else if (obj.media_type === 'CAROUSEL_ALBUM') {
+                for (const child of obj.children.data) {
+                    if (child.media_type === 'IMAGE') {
+                        filteredImages.push(child);
+                    }
+                }
+            }
+        };
+        console.log("\tFiltered Images", filteredImages);
+
+        // Save Filtered Images in MongoDB
+        const result2 = await Image.insertMany(filteredImages);
+        console.log('* Document inserted with _id:', result2.insertedId);
+
+    } catch (error) {
+        console.error('! MongoDB insertion error:', error);
+    } finally {
+        await mongoose.disconnect();
+    }
+};
+
+// GET GALLERY *****************************************
+app.get('/gallery', async (req, res) => {
+    try {
+        const response = await axios.get(`${instagramApiURL}/me/media?fields=id,media_type,media_url,children{id,media_type,media_url,timestamp},caption,timestamp&access_token=${instagramAccessToken}`, headerConfig)
+        res.json(response.data);
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ error: 'Request to retrieve document failed' });
+    }
 });
 
-// main().catch(err => console.log(err));
+// TODO: Get the media_urls from the instagram-media[media] objects from the MongoDB database
+// GET GALLERYMONGO*****************************************
+app.get('/gallerymongo', async (req, res) => {
+    try {
+        const response = await axios.get(`${instagramApiURL}/me/media?fields=id,media_type,media_url,children{id,media_type,media_url,timestamp},caption,timestamp&access_token=${instagramAccessToken}`, headerConfig)
+        res.json(response.data);
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ error: 'Request to retrieve document failed' });
+    }
+});
 
-// main()
-//   .then(() => {
-//     console.log('MongoDB connection successful.');
-//   })
-//   .catch((error) => {
-//     console.error('MongoDB connection error:', error);
-//   });
+app.listen(PORT || 3000, () => {
+    console.log(`Server listening on http://localhost:${PORT}...`);
+    // dropCollection('media');
+    UpdateMediaInMongoDB();
+    // main().catch(err => console.log(err));
+});
