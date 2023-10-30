@@ -2,6 +2,7 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';
 import axios from 'axios';
 import { Datum, Paging, RootMedia, ChildrenSchema, Image } from './images-model.mjs';
 
@@ -11,6 +12,20 @@ const PORT = process.env.PORT || 3000;
 const instagramApiURL = process.env.INSTAGRAM_API_URL;
 const instagramAccessToken = process.env.INSTAGRAM_ACCESS_TOKEN;
 const mongodbConnectString = process.env.MONGODB_CONNECT_STRING;
+
+// Admin
+const mongodbAdminConnectString = process.env.MONGODB_ADMIN_CONNECT_STRING
+
+// Connect to admin database
+const adminConn = mongoose.createConnection(`${mongodbAdminConnectString}`)
+adminConn.on('connected', () => {
+    console.log("Connected to Admin Database");
+});
+
+adminConn.on('error', (err) => {
+    console.error(err);
+});
+
 const router = express.Router();
 
 const headerConfig = {
@@ -21,6 +36,7 @@ const headerConfig = {
 };
 
 app.use(express.json());  // to support JSON-encoded bodies
+app.use(cors()); // so the frontend can talk to the backend
 
 // CREATE model *****************************************
 const createImage = async (media_id, media_type, media_url, caption, date) => {
@@ -123,6 +139,6 @@ app.get('/gallerymongo', async (req, res) => {
 app.listen(PORT || 3000, () => {
     console.log(`Server listening on http://localhost:${PORT}...`);
     // dropCollection('media');
-    UpdateMediaInMongoDB();
+    // UpdateMediaInMongoDB();
     // main().catch(err => console.log(err));
 });
