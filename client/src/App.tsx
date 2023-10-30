@@ -6,12 +6,16 @@ import { FooterLinks } from './components/FooterLinks/FooterLinks';
 import { Home } from './pages/Home/Home';
 import { AboutTom } from './pages/AboutTom/AboutTom';
 import { AboutUs } from './pages/AboutUs/AboutUs';
+import { Login } from './pages/Login/Login';
+import { Signup } from './pages/Signup/Signup';
+import { Admin } from './pages/Admin/Admin';
 // import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function App() {
   return (
-    <Router>
+    <Router basename="/tbmhp">
 
       <MantineProvider theme={theme}>
         <HeaderSimple />
@@ -37,6 +41,9 @@ export default function App() {
               <Route path="/gallery"/>
               <Route path="/donate" />
               <Route path="/contact" />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/admin" element={<Admin />} />
             </Routes>
           </Box>
         </Center>

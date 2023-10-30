@@ -1,7 +1,9 @@
-
 import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import authRoute from './Routes/AuthRoute.mjs';
 import axios from 'axios';
 import { Datum, Paging, RootMedia, ChildrenSchema, Image } from './images-model.mjs';
 
@@ -11,16 +13,21 @@ const PORT = process.env.PORT || 3000;
 const instagramApiURL = process.env.INSTAGRAM_API_URL;
 const instagramAccessToken = process.env.INSTAGRAM_ACCESS_TOKEN;
 const mongodbConnectString = process.env.MONGODB_CONNECT_STRING;
-const router = express.Router();
 
 const headerConfig = {
     headers: {
         'Accept': 'application/json', // Specify that you expect JSON
-        // Add any other headers as needed
     },
 };
 
 app.use(express.json());  // to support JSON-encoded bodies
+app.use(cors({
+    origin: ["http://localhost:5173"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })); // so the frontend can talk to the backend
+app.use(cookieParser()); // Parse cookies for auth
+app.use("/admin", authRoute); // Admin routes
 
 // CREATE model *****************************************
 const createImage = async (media_id, media_type, media_url, caption, date) => {
@@ -120,9 +127,11 @@ app.get('/gallerymongo', async (req, res) => {
     }
 });
 
+
+
 app.listen(PORT || 3000, () => {
     console.log(`Server listening on http://localhost:${PORT}...`);
     // dropCollection('media');
-    UpdateMediaInMongoDB();
+    // UpdateMediaInMongoDB();
     // main().catch(err => console.log(err));
 });
