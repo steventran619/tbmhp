@@ -1,4 +1,4 @@
-import { Signup } from '../Controllers/AuthController.mjs';
+import { Signup, Login } from '../Controllers/AuthController.mjs';
 import express from 'express';
 import { createUserModel } from '../Models/AdminModel.mjs';
 import mongoose from 'mongoose';
@@ -12,5 +12,6 @@ const User = createUserModel(adminConn);
 const router = express.Router();
 
 router.post('/signup', (req, res, next) => Signup(User, req, res, next));
+router.post('/login', (req, res, next) => Login(User, req, res, next));
 
 export default router;
