@@ -16,7 +16,7 @@ router.post('/signup', (req, res, next) => Signup(User, req, res, next));
 router.post('/login', (req, res, next) => Login(User, req, res, next));
 
 router.post('/', userVerification, (req, res) => {
-    res.json({ message: "User verified successfully!" });
+    
 });
 
 export default router;

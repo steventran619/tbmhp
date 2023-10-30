@@ -8,9 +8,8 @@ const User = createUserModel(adminConn);
 
 export const userVerification = (req, res, next) => {
   const token = req.cookies.token;
-  
   if (!token) {
-    return res.status(401).json({ status: false, message: "No token provided" }); // Unauthorized
+    return res.status(401).json({ status: false, message: "No token provided" }); 
   }
 
   jwt.verify(token, process.env.TOKEN_KEY, async (err, data) => {

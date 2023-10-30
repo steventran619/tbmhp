@@ -21,7 +21,11 @@ const headerConfig = {
 };
 
 app.use(express.json());  // to support JSON-encoded bodies
-app.use(cors()); // so the frontend can talk to the backend
+app.use(cors({
+    origin: ["http://localhost:5173"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })); // so the frontend can talk to the backend
 app.use(cookieParser()); // Parse cookies for auth
 app.use("/admin", authRoute); // Admin routes
 
