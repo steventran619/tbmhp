@@ -10,10 +10,14 @@ export const Gallery = (): React.ReactElement => {
         return res.json();
     };
 
-    const result = useQuery({ queryKey: ['images'], queryFn: getMongoImages })
+    const result = useQuery({
+        queryKey: ['images'],
+        queryFn: getMongoImages,
+        staleTime: 1000 * 60 * 5 // 5 minute cache
+    })
 
     return (
-        <div>
+        <>
             <h2>Instagram Gallery</h2>
             {result.isLoading ? (
                 <Loader color="rgba(53, 128, 10, 1)" type="bars" />
@@ -39,6 +43,6 @@ export const Gallery = (): React.ReactElement => {
                 </SimpleGrid>
             )
             }
-        </div >
+        </>
     );
 }
