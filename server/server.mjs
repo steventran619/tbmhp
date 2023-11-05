@@ -5,7 +5,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import authRoute from './Routes/AuthRoute.mjs';
 import axios from 'axios';
-import { Datum, Paging, RootMedia, ChildrenSchema, Image } from './images-model.mjs';
+import { Datum, Paging, RootMedia, ChildrenSchema, Image } from './Models/ImagesModel.mjs';
 
 dotenv.config();
 const app = express();
@@ -59,8 +59,7 @@ async function dropCollection(collectionName) {
     }
 }
 
-// TODO: Create a function to insert the Media and Images into the MongoDB database
-// This is used for fetching from Instagram and inserting into MongoDB
+// TODO: Create a handler that will update the tb/urls every 24 hours?
 async function UpdateMediaInMongoDB() {
     await dropCollection('images');
     await dropCollection('media-all');
@@ -70,7 +69,7 @@ async function UpdateMediaInMongoDB() {
     const database = mongoose.connection;
     // const collection = database.collection('images');
     try {
-        const response = await axios.get(`${instagramApiURL}/me/media?fields=id,media_type,media_url,children{id,media_type,media_url,timestamp},caption,timestamp&access_token=${instagramAccessToken}`, headerConfig)
+        const response = await axios.get(`${instagramApiURL}/me/media?fields=id,media_type,media_url,children{id,media_type,media_url,permalink,timestamp},caption,timestamp&access_token=${instagramAccessToken}`, headerConfig)
         let dataToInsert = response.data;
 
         // Save Raw Media in MongoDB
@@ -127,11 +126,23 @@ app.get('/gallerymongo', async (req, res) => {
     }
 });
 
+// Get Images from MongoDB/images collection
+app.get('/instagram-images', async (req, res) => {
+    try {
+        await mongoose.connect(`${mongodbConnectString}`);
+        const images = await Image.find()
+        res.json(images);
+    } catch (error) {
+        res.status(500).json({ error: 'Request to retrieve document failed' });
+    } finally {
+        await mongoose.disconnect();
+    }
+});
 
 
 app.listen(PORT || 3000, () => {
     console.log(`Server listening on http://localhost:${PORT}...`);
     // dropCollection('media');
-    // UpdateMediaInMongoDB();
+    UpdateMediaInMongoDB();
     // main().catch(err => console.log(err));
 });
