@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Image as ImageType } from '../../types';
 import { SimpleGrid, Image, Loader } from '@mantine/core';
+import { IconExclamationCircle } from '@tabler/icons-react';
 
 export const Gallery = (): React.ReactElement => {
     const getMongoImages = async () => {
@@ -15,9 +16,9 @@ export const Gallery = (): React.ReactElement => {
         <div>
             <h2>Instagram Gallery</h2>
             {result.isLoading ? (
-                <Loader color="rgba(53, 128, 10, 1)" type="bars" size={50}/>
+                <Loader color="rgba(53, 128, 10, 1)" type="bars" />
             ) : result.isError ? (
-                <span>Error: {result.error.message}</span>
+                <span><IconExclamationCircle></IconExclamationCircle> {result.error.message}</span>
             ) : (
                 <SimpleGrid
                     cols={{ base: 1, sm: 2, lg: 3 }}
