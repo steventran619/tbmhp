@@ -24,6 +24,7 @@ export const Login: React.FC = () => {
   };
 
   const handleError = (err: string) => {
+    console.log(err);
     toast.error(err, {
       position: "bottom-left",
     });
@@ -50,7 +51,7 @@ export const Login: React.FC = () => {
         handleSuccess(message);
         setTimeout(() => {
           navigate("/admin");
-        }, 3000);
+        }, 1000);
       } else {
         handleError(message);
       }

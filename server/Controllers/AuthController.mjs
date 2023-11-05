@@ -6,17 +6,17 @@ export async function Signup(User, req, res, next) {
     const { email, password, username, adminPassword } = req.body;
 
     if (!(email && password && username && adminPassword)) {
-        return res.status(400).json({message: "Missing Required Field"});
+        return res.json({message: "Missing Required Field"});
     }
     // Admin password check
     if (adminPassword != process.env.ADMIN_PASSWORD) {
-      return res.status(401).json({message: "Incorrect Admin Password"});
+      return res.json({message: "Incorrect Admin Password"});
     }
 
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
-      return res.status(409).json({ message: "User already exists" }); // Conflict
+      return res.json({ message: "User already exists" }); // Conflict
     }
 
     const user = await User.create({ email, password, username });
@@ -37,22 +37,23 @@ export async function Signup(User, req, res, next) {
 
 export async function Login(User, req, res, next) {
   try {
+    console.log("TEST")
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return res.status(400).json({ message: 'All fields are required' }); // Bad Request
+      return res.json({ message: 'All fields are required' }); // Bad Request
     }
 
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(401).json({ message: 'Incorrect password or email' }); // Unauthorized
+      return res.json({ message: 'Incorrect password or email' }); // Unauthorized
     }
 
     const auth = await bcrypt.compare(password, user.password);
 
     if (!auth) {
-      return res.status(401).json({ message: 'Incorrect password or email' }); // Unauthorized
+      return res.json({ message: 'Incorrect password or email' }); // Unauthorized
     }
 
     const token = createSecretToken(user._id);
