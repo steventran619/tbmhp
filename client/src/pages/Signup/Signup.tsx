@@ -2,7 +2,6 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-
 interface InputValue {
   email: string;
   password: string;
@@ -12,7 +11,6 @@ interface InputValue {
 
 export const Signup: React.FC = () => {
   const navigate = useNavigate();
-  
   const [inputValue, setInputValue] = useState<InputValue>({
     email: "",
     password: "",
