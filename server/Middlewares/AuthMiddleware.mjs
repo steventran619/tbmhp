@@ -8,22 +8,24 @@ const User = createUserModel(adminConn);
 
 export const userVerification = (req, res, next) => {
   const token = req.cookies.token;
+  console.log(token)
   if (!token) {
-    return res.status(401).json({ status: false, message: "No token provided" }); 
+    return res.json({ status: false, message: "No token provided" }); 
   }
 
   jwt.verify(token, process.env.TOKEN_KEY, async (err, data) => {
     if (err) {
-      return res.status(403).json({ status: false, message: "Failed to authenticate token" }); // Forbidden
+      return res.json({ status: false, message: "Failed to authenticate token" }); // Forbidden
     } 
 
     try {
       const user = await User.findById(data.id);
-      
+      // console.log("-----")
+      // console.log(user);
       if (user) {
-        next();
+        return res.json({ status: true, user: user.username })
       } else {
-        return res.status(404).json({ status: false, message: "User not found" }); 
+        return res.json({ status: false, message: "User not found" }); 
       }
     } catch (error) {
       console.error(error);
