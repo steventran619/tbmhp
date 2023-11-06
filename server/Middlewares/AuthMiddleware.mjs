@@ -8,7 +8,6 @@ const User = createUserModel(adminConn);
 
 export const userVerification = (req, res, next) => {
   const token = req.cookies.token;
-  console.log(token)
   if (!token) {
     return res.json({ status: false, message: "No token provided" }); 
   }
@@ -20,8 +19,6 @@ export const userVerification = (req, res, next) => {
 
     try {
       const user = await User.findById(data.id);
-      // console.log("-----")
-      // console.log(user);
       if (user) {
         return res.json({ status: true, user: user.username })
       } else {
