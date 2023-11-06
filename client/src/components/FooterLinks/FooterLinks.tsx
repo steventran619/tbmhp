@@ -2,6 +2,9 @@ import { Text, Container, Image, ActionIcon, Group, rem } from '@mantine/core';
 import { IconBrandInstagram, IconBrandFacebook } from '@tabler/icons-react';
 import logoImage from '../../images/logo.png';
 import classes from './FooterLinks.module.css';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
+import axios from 'axios';
+import { ToastContainer, toast } from "react-toastify";
 
 const data = [
   {
@@ -32,6 +35,16 @@ const data = [
 ];
 
 export function FooterLinks() {
+  const [newsletterValue, setNewsletterValue] = useState<{
+    email: string;
+    firstname: string;
+    lastname: string;
+  }>({
+    email: "",
+    firstname: "",
+    lastname: "",
+  })
+  const { email, firstname, lastname } = newsletterValue;
   const groups = data.map((group) => {
     const links = group.links.map((link, index) => (
       <Text
@@ -53,6 +66,96 @@ export function FooterLinks() {
     );
   });
 
+  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setNewsletterValue((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+  const handleError = (err: string) => {
+    console.log(err);
+    toast.error(err, {
+      position: "bottom-left",
+    });
+  };
+
+  const handleSuccess = (msg: string) => {
+    toast.success(msg, {
+      position: "bottom-left",
+    });
+  };
+
+  const handleNewsletterSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.post(
+        "http://localhost:3000/newsletter/signup",
+        {
+          ...newsletterValue,
+        },
+        { withCredentials: true }
+      );
+      const { success, message } = data;
+      if (success) {
+        handleSuccess(message);
+      } else {
+        handleError(message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setNewsletterValue({
+      ...newsletterValue,
+      email: "",
+      firstname: "",
+      lastname: "",
+    });
+  };
+
+  // Add the form as another group within the groups container
+  groups.push(
+    <div className={classes.wrapper} key="newsletter">
+      <form onSubmit={handleNewsletterSubmit} className={classes.form}>
+        <Text className={classes.title}>Subscribe to our newsletter</Text>
+        <div className={classes.formField}>
+          <label htmlFor="email" className={classes.label}>Email</label>
+          <input
+            type="email"
+            name="email"
+            value={email}
+            placeholder="Enter your email"
+            onChange={handleOnChange}
+            className={classes.input}
+          />
+        </div>
+        <div className={classes.formField}>
+          <label htmlFor="firstname" className={classes.label}>First Name</label>
+          <input
+            type="text"
+            name="firstname"
+            value={firstname}
+            placeholder="Enter Your First Name"
+            onChange={handleOnChange}
+            className={classes.input}
+          />
+        </div>
+        <div className={classes.formField}>
+          <label htmlFor="lastname" className={classes.label}>Last Name</label>
+          <input
+            type="text"
+            name="lastname"
+            value={lastname}
+            placeholder="Enter Your Last Name"
+            onChange={handleOnChange}
+            className={classes.input}
+          />
+        </div>
+        <button type="submit" className={classes.submitButton}>Subscribe</button>
+      </form>
+    </div>
+  );
+
   return (
     <footer className={classes.footer}>
       <Container className={classes.inner}>
@@ -64,6 +167,7 @@ export function FooterLinks() {
           </Text>
         </div>
         <div className={classes.groups}>{groups}</div>
+      <ToastContainer />
       </Container>
       <Container className={classes.afterFooter}>
         <Text c="dimmed" size="sm">
