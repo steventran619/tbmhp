@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import authRoute from './Routes/AuthRoute.mjs';
+import newsletterRoute from './Routes/NewsletterRoute.mjs';
 import instagramImages from './Routes/MediaRoutes.mjs';
 
 
@@ -18,6 +19,7 @@ app.use(cors({
 })); // so the frontend can talk to the backend
 app.use(cookieParser()); // Parse cookies for auth
 app.use("/admin", authRoute); // Admin routes
+app.use("/newsletter", newsletterRoute); // Admin routes
 app.use("/gallery", instagramImages); // Instagram routes)
 
 // Global error handling
