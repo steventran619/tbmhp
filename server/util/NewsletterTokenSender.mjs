@@ -16,14 +16,11 @@ dotenv.config();
 async function sendVerification(firstname, email, token) {
   const verificationTemplate = `
   <h1>Hi ${firstname}</h1>
-  <p>You have recently visited  
-           our website and entered your email. 
+  <p>Thank you for subscribing to our newsletter. 
            Please follow the given link to verify your email 
            http://localhost:3000/newsletter/verify/${token} 
-           
-           Thanks,
-           TBMHP Team 
   </p>
+  <p>TBMHP Team</p>
            
   `;
 

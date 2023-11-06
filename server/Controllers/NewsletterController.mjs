@@ -1,6 +1,6 @@
 import { createSecretToken } from '../util/SecretToken.mjs';
 import { sendVerification } from '../util/NewsletterTokenSender.mjs';
-import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 export async function Signup(NewsletterSubscriber, req, res, next) {
   try {
@@ -40,4 +40,29 @@ export async function Signup(NewsletterSubscriber, req, res, next) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" }); // Internal Server Error
   }
+}
+
+export async function Verify(NewsletterSubscriber, req, res, next) {
+    const token = req.params.token;
+    if (!token) {
+      return res.json({ status: false, message: "No token provided"});
+    }
+    jwt.verify(token, process.env.TOKEN_KEY, async (err, data) => {
+      if (err) {
+        console.log(err)
+        return res.json({ status: false, message: "Failed to authenticate token" }); // Forbidden
+      } 
+
+      try {
+        const subscriber = await NewsletterSubscriber.findByIdAndUpdate(data.id, {active: true }, {new: true})
+        if (subscriber) {
+          return res.json({ status: true, message: "Subscriber is active"});
+        } else {
+          return res.json({ status: false, message: "Subscriber not found" }); 
+        }
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ status: false, message: "Internal Server Error" }); 
+      }
+    });
 }
