@@ -104,13 +104,6 @@
   margin-bottom: var(--mantine-spacing-sm);
 }
 
-.label {
-  display: block;
-  font-size: var(--mantine-font-size-sm);
-  margin-bottom: var(--mantine-spacing-xs);
-  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-0));
-}
-
 .input {
   width: 100%;
   padding: var(--mantine-spacing-xs);

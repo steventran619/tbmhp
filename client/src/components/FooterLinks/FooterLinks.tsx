@@ -2,7 +2,7 @@ import { Text, Container, Image, ActionIcon, Group, rem } from '@mantine/core';
 import { IconBrandInstagram, IconBrandFacebook } from '@tabler/icons-react';
 import logoImage from '../../images/logo.png';
 import classes from './FooterLinks.module.css';
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from "react-toastify";
 
@@ -119,34 +119,31 @@ export function FooterLinks() {
       <form onSubmit={handleNewsletterSubmit} className={classes.form}>
         <Text className={classes.title}>Subscribe to our newsletter</Text>
         <div className={classes.formField}>
-          <label htmlFor="email" className={classes.label}>Email</label>
           <input
             type="email"
             name="email"
             value={email}
-            placeholder="Enter your email"
+            placeholder="Email"
             onChange={handleOnChange}
             className={classes.input}
           />
         </div>
         <div className={classes.formField}>
-          <label htmlFor="firstname" className={classes.label}>First Name</label>
           <input
             type="text"
             name="firstname"
             value={firstname}
-            placeholder="Enter Your First Name"
+            placeholder="First Name"
             onChange={handleOnChange}
             className={classes.input}
           />
         </div>
         <div className={classes.formField}>
-          <label htmlFor="lastname" className={classes.label}>Last Name</label>
           <input
             type="text"
             name="lastname"
             value={lastname}
-            placeholder="Enter Your Last Name"
+            placeholder="Last Name"
             onChange={handleOnChange}
             className={classes.input}
           />
