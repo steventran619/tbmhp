@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 export const Admin: FC = () => {
   const navigate = useNavigate();
-  const [cookies, setCookie, removeCookie] = useCookies(['token']);
+  const [cookies, removeCookie] = useCookies(['token']);
   const [username, setUsername] = useState<string>("");
   const [isLoading, setIsLoading] = useState(true); // Add a loading state
 
