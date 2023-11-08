@@ -13,13 +13,12 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());  // to support JSON-encoded bodies
 app.use(cors({
-    // origin: '*', // Allow all origins
     origin: [
-        "http://127.0.0.1:5173/tbmhp/",
-        "127.0.0.1:5173/*",
-        "http://localhost:5173/", 
-        "http://localhost:8080/tbmhp/", 
-        "https://steventran619.github.io/tbmhp/"
+        "http://127.0.0.1:5173",
+        "http://127.0.0.1:8080",
+        "http://localhost:5173", 
+        "http://localhost:8080", 
+        "https://steventran619.github.io/tbmhp"
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
