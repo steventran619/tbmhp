@@ -2,7 +2,5 @@ client/node_modules/
 client/dist
 .DS_Store
 server/node_modules/
-*.env
-server/.env
-client/.env
-client/.env.production
+.env*
+
