@@ -6,7 +6,7 @@ import { IconExclamationCircle } from '@tabler/icons-react';
 
 export const Gallery = (): React.ReactElement => {
     const getMongoImages = async () => {
-        const res = await fetch(' http://localhost:3000/gallery');
+        const res = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/gallery`);
         return res.json();
     };
 
