@@ -42,7 +42,7 @@ export const Signup: React.FC = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:3000/admin/signup",
+        `${import.meta.env.VITE_REACT_APP_API_URL}/admin/signup`,
         {
           ...inputValue,
         },
