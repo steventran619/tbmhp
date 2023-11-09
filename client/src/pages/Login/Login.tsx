@@ -40,7 +40,7 @@ export const Login: React.FC = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:3000/admin/login",
+        `${import.meta.env.VITE_REACT_APP_API_URL}/admin/login`,
         {
           ...inputValue,
         },

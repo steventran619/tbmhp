@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 export const Admin: FC = () => {
   const navigate = useNavigate();
-  const [cookies, setCookie, removeCookie] = useCookies(['token']);
+  const [cookies, , removeCookie] = useCookies(['token']);
   const [username, setUsername] = useState<string>("");
   const [isLoading, setIsLoading] = useState(true); // Add a loading state
 
@@ -18,7 +18,7 @@ export const Admin: FC = () => {
       }
       try {
         const { data } = await axios.post(
-          "http://localhost:3000/admin",
+          `${import.meta.env.VITE_REACT_APP_API_URL}/admin`,
           {},
           { withCredentials: true }
         );
