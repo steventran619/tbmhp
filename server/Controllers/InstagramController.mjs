@@ -1,4 +1,3 @@
-// TODO: Learn how to use map or filter nested objects?
 import mongoose from "mongoose";
 import axios from "axios";
 import { RootMedia, Image } from '../Models/ImagesModel.mjs';
@@ -29,12 +28,13 @@ async function dropCollection(collectionName) {
 
 // TODO: Create a handler that will update the db/urls every 24 hours?
 async function UpdateMedia() {
+    console.log("test");
     await dropCollection('images');
     await dropCollection('media-all');
 
     await mongoose.connect(`${mongodbConnectString}`);
 
-    const database = mongoose.connection;
+    // const database = mongoose.connection;
     try {
         const response = await axios.get(`${instagramApiURL}/me/media?fields=id,media_type,media_url,children{id,media_type,media_url,permalink,timestamp},caption,timestamp&access_token=${instagramAccessToken}`, headerConfig)
         let dataToInsert = response.data;
