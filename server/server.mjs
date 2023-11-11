@@ -14,15 +14,18 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());  // to support JSON-encoded bodies
 app.use(cors({
+    // origin: [
+    //     "http://127.0.0.1:8080",
+    //     "http://127.0.0.1:5173",
+    //     "http://127.0.0.1:8080/tbmhp",
+    //     "http://localhost:5173", 
+    //     "http://localhost:5173/tbmhp", 
+    //     "http://localhost:8080", 
+    //     "http://localhost:8080/tbmhp", 
+    //     "https://steventran619.github.io/tbmhp"
+    // ],
     origin: [
-        "http://127.0.0.1:8080",
-        "http://127.0.0.1:5173",
-        "http://127.0.0.1:8080/tbmhp",
-        "http://localhost:5173", 
-        "http://localhost:5173/tbmhp", 
-        "http://localhost:8080", 
-        "http://localhost:8080/tbmhp", 
-        "https://steventran619.github.io/tbmhp"
+        "*"
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
