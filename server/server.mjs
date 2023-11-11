@@ -15,6 +15,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());  // to support JSON-encoded bodies
 app.use(cors({
     origin: [
+        "http://127.0.0.1:8080",
         "http://127.0.0.1:5173",
         "http://127.0.0.1:8080/tbmhp",
         "http://localhost:5173", 
