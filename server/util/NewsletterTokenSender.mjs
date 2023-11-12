@@ -14,14 +14,12 @@ dotenv.config();
 
 
 async function sendVerification(firstname, email, token) {
+  const verificationUrl = `${process.env.SERVER_BASE_URL}/newsletter/verify/${token}`;
   const verificationTemplate = `
-  <h1>Hi ${firstname}</h1>
-  <p>Thank you for subscribing to our newsletter. 
-           Please follow the given link to verify your email 
-           http://localhost:3000/newsletter/verify/${token} 
-  </p>
-  <p>TBMHP Team</p>
-           
+    <h1>Hi ${firstname}</h1>
+    <p>Thank you for subscribing to our newsletter. 
+       Please follow the <a href="${verificationUrl}">Link</a> to verify your email.</p>
+    <p>TBMHP Team</p>
   `;
 
 
