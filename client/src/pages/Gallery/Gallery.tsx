@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Image as ImageType } from '../../types';
 import { SimpleGrid, Image, Loader } from '@mantine/core';
 import { IconExclamationCircle } from '@tabler/icons-react';
+import { CloudGallery } from '../../components/CloudGallery/CloudGallery';
 
 export const Gallery = (): React.ReactElement => {
     const getMongoImages = async () => {
@@ -43,6 +44,7 @@ export const Gallery = (): React.ReactElement => {
                 </SimpleGrid>
             )
             }
+            <CloudGallery />
         </>
     );
 }
