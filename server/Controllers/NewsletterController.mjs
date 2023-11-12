@@ -1,18 +1,21 @@
 import { createSecretToken } from '../util/SecretToken.mjs';
 import { sendVerification } from '../util/NewsletterTokenSender.mjs';
 import jwt from 'jsonwebtoken';
+import validator from 'validator';
 
 export async function Signup(NewsletterSubscriber, req, res, next) {
   try {
     const { email, firstname, lastname } = req.body;
-    let subscriber;
 
     if (!(email && firstname && lastname)) {
         return res.json({message: "Missing Required Field"});
     }
-
+    if (!(validator.isEmail(email))) {
+      return res.json({message: "Invalid Email"});
+    }
+    
     const existingSubscriber = await NewsletterSubscriber.findOne({ email });
-
+    let subscriber;
     // If the user has an active account (already verified, return)
     if (existingSubscriber) {
       if (existingSubscriber.active) {
@@ -42,27 +45,23 @@ export async function Signup(NewsletterSubscriber, req, res, next) {
   }
 }
 
-export async function Verify(NewsletterSubscriber, req, res, next) {
-    const token = req.params.token;
-    if (!token) {
-      return res.json({ status: false, message: "No token provided"});
-    }
-    jwt.verify(token, process.env.TOKEN_KEY, async (err, data) => {
-      if (err) {
-        console.log(err)
-        return res.json({ status: false, message: "Failed to authenticate token" }); // Forbidden
-      } 
+export async function Verify(NewsletterSubscriber, token) {
+  if (!token) {
+    throw new Error('No token provided');
+  }
 
-      try {
-        const subscriber = await NewsletterSubscriber.findByIdAndUpdate(data.id, {active: true }, {new: true})
-        if (subscriber) {
-          return res.json({ status: true, message: "Subscriber is active"});
-        } else {
-          return res.json({ status: false, message: "Subscriber not found" }); 
-        }
-      } catch (error) {
-        console.error(error);
-        res.status(500).json({ status: false, message: "Internal Server Error" }); 
-      }
-    });
+  try {
+    const decoded = jwt.verify(token, process.env.TOKEN_KEY);
+    const subscriber = await NewsletterSubscriber.findByIdAndUpdate(decoded.id, { active: true }, { new: true });
+
+    if (!subscriber) {
+      throw new Error('Subscriber not found');
+    }
+
+    return { success: true };
+  } catch (error) {
+    // Log the error and rethrow it
+    console.error(error);
+    throw error;
+  }
 }
