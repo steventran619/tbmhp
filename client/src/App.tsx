@@ -10,6 +10,9 @@ import { Login } from './pages/Login/Login';
 import { Signup } from './pages/Signup/Signup';
 import { Admin } from './pages/Admin/Admin';
 import { Gallery } from './pages/Gallery/Gallery';
+import NewsletterSuccess from './pages/NewsletterSuccess/NewsletterSuccess';
+import NewsletterFailure from './pages/NewsletterFailure/NewsletterFailure';
+
 // import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
@@ -48,6 +51,8 @@ export default function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/admin" element={<Admin />} />
+                <Route path="/newsletter-success" element={<NewsletterSuccess />} />
+                <Route path="/newsletter-failure" element={<NewsletterFailure />} />
               </Routes>
             </Box>
           </Center>
