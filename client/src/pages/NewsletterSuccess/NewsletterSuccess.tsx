@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NewsletterSuccess: React.FC = () => {
+const NewsletterSuccess = (): React.ReactElement => {
   return (
     <div className="newsletter-success">
       <h1>Success!</h1>
