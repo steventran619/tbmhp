@@ -1,5 +1,5 @@
 import { createSecretToken } from '../util/SecretToken.mjs';
-import { sendVerification } from '../util/NewsletterTokenSender.mjs';
+import { sendEmail } from '../util/SendEmail.mjs';
 import jwt from 'jsonwebtoken';
 import validator from 'validator';
 
