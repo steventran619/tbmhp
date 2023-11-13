@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { CloudinaryAlbum } from '../../types';
-import { SimpleGrid, Image, Loader } from '@mantine/core';
+import { SimpleGrid, Image, Loader, Divider } from '@mantine/core';
 
 
 export const CloudGallery = (): React.ReactElement => {
@@ -18,7 +18,7 @@ export const CloudGallery = (): React.ReactElement => {
 
     if (result.isLoading) {
         return (
-            <span>Still Loading</span>
+            <Loader color="rgba(53, 128, 10, 1)" type="oval" />
         )
     }
 
@@ -32,6 +32,7 @@ export const CloudGallery = (): React.ReactElement => {
         <div>
             {result.data?.map((album: CloudinaryAlbum, index: number) => (
                 <div key={index}>
+                    <Divider my="xl" size="md"/>
                     <h2>{album.album}</h2>
                     <SimpleGrid
                         cols={{ base: 1, sm: 2, lg: 3 }}
