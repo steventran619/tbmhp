@@ -12,6 +12,8 @@ import { Admin } from './pages/Admin/Admin';
 import { Gallery } from './pages/Gallery/Gallery';
 import NewsletterSuccess from './pages/NewsletterSuccess/NewsletterSuccess';
 import NewsletterFailure from './pages/NewsletterFailure/NewsletterFailure';
+import UnsubscribeSuccess from './pages/UnsubscribeSuccess/UnsubscribeSuccess';
+import UnsubscribeFailure from './pages/UnsubscribeFailure/UnsubscribeFailure';
 
 // import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -53,6 +55,8 @@ export default function App() {
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/newsletter-success" element={<NewsletterSuccess />} />
                 <Route path="/newsletter-failure" element={<NewsletterFailure />} />
+                <Route path="/unsubscribe-success" element={<UnsubscribeSuccess />} />
+                <Route path="/unsubscribe-failure" element={<UnsubscribeFailure />} />
               </Routes>
             </Box>
           </Center>
