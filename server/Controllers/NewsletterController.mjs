@@ -86,6 +86,30 @@ export async function Verify(NewsletterSubscriber, token) {
   }
 }
 
+export async function Unsubscribe(NewsletterSubscriber, token) {
+  if (!token) {
+    throw new Error('No token provided')
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.TOKEN_KEY);
+    const email = decoded.email;
+    const subscriber = await NewsletterSubscriber.findByIdAndUpdate(decoded.id, { active: false }, { new: true });
+
+    if (!subscriber) {
+      throw new Error('Subscriber not found');
+    }
+
+    // Send confirmation email
+    const confirmationSubject = 'TBMHP Newsletter Unsubscription'
+    const confirmationMessage = `
+      <h1>Goodbye!</h1>
+      <p>Your email has now been unsubscribed. We're sorry to see you go! If you'd like to resubscribe please do so on our <a href="${process.env.APP_BASE_URL}/">website</a>.</p> 
+      <p>TBMHP Team</p>
+      `;
+    
+    await sendEmail(email, confirmationSubject, confirmationMessage);
+
     return { success: true };
   } catch (error) {
     // Log the error and rethrow it
