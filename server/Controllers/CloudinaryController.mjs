@@ -23,7 +23,7 @@ export default async function SamplesFolder() {
 
 export async function SampleMedia(folderName) {
     try {
-        const response = await axios.get(`${cloudinaryFoldersMediaUrl}${folderName}`, {
+        const response = await axios.get(`${cloudinaryFoldersMediaUrl}/${folderName}`, {
             auth: {
                 username: cloudinaryKey,
                 password: cloudinarySecret
