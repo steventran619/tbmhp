@@ -20,7 +20,10 @@ export async function Signup(User, req, res, next) {
     }
 
     const user = await User.create({ email, password, username });
-    const token = createSecretToken(user._id);
+    
+    // Expires in 3 days
+    const jwtExpireTime = 3 * 24 * 60 * 60;
+    const token = createSecretToken({id: user._id}, jwtExpireTime);
     res.cookie("token", token, {
       withCredentials: true,
       httpOnly: false,
@@ -55,7 +58,9 @@ export async function Login(User, req, res, next) {
       return res.json({ message: 'Incorrect password or email' }); // Unauthorized
     }
 
-    const token = createSecretToken(user._id);
+    // Expires in 3 days
+    const jwtExpireTime = 3 * 24 * 60 * 60;
+    const token = createSecretToken({id: user._id}, jwtExpireTime);
     res.cookie("token", token, {
       withCredentials: true,
       httpOnly: false,
