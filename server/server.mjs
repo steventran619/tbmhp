@@ -37,6 +37,6 @@ app.use((err, _req, res, next) => {
 app.listen(PORT || 3000, () => {
     console.log(`Server listening on http://localhost:${PORT}...`);
     // dropCollection('media');
-    UpdateMedia();
+    // UpdateMedia();
     // main().catch(err => console.log(err));
 });
