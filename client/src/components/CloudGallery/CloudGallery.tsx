@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { CloudinaryAlbum } from '../../types';
 import { SimpleGrid, Image, Loader, Divider } from '@mantine/core';
-import { titleCase } from '../../utilities/titleCase';
+import { titleCase } from '../../utils/titleCase';
 
 
 export const CloudGallery = (): React.ReactElement => {
