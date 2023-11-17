@@ -60,13 +60,9 @@ export async function Verify(NewsletterSubscriber, token) {
     if (!subscriber) {
       throw new Error('Subscriber not found');
     }
-
-        // Create jwt token (expires in 1 year) to send for unsubscription email
-    const jwtExpireTime = 365 * 24 * 60 * 60;
-    const unsubscribeToken = createSecretToken({id: subscriber._id, email: subscriber.email}, jwtExpireTime);
     
     // Send confirmation email
-    const unsubscribeUrl = `${process.env.SERVER_BASE_URL}/newsletter/unsubscribe/${unsubscribeToken}`;
+    const unsubscribeUrl = `${process.env.APP_BASE_URL}/newsletter/unsubscribe`;
     const confirmationSubject = 'TBMHP Newsletter Confirmation'
     const confirmationMessage = `
       <h1>Welcome!</h1>
@@ -86,6 +82,46 @@ export async function Verify(NewsletterSubscriber, token) {
   }
 }
 
+export async function SendUnsubscribeToken(NewsletterSubscriber, req, res, next) {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+        return res.json({message: "Missing Required Field"});
+    }
+    console.log(email)
+    if (!(validator.isEmail(email))) {
+      return res.json({message: "Invalid Email"});
+    }
+    
+    const existingSubscriber = await NewsletterSubscriber.findOne({ email });
+    // If the user has an active account (already verified, return)
+    if (!existingSubscriber || !existingSubscriber.active) {
+      return res.json({ message: "This email is not subscribed" });
+    }
+
+    // Create jwt token to send with email
+    const jwtExpireTime = 3 * 24 * 60 * 60;
+    const token = createSecretToken({id: existingSubscriber._id, email: email}, jwtExpireTime);
+    
+    // Send email
+    const unsubscribeUrl = `${process.env.SERVER_BASE_URL}/newsletter/unsubscribe/${token}`;
+    const unsubscribeSubject = 'TBMHP Newsletter Unsubscription'
+    const unsubscribeMessage = `
+      <h1>Unsubscribe</h1>
+      <p>Please follow the <a href="${unsubscribeUrl}">Link</a> to unsubscribe.</p>
+      <p>TBMHP Team</p>
+      `;
+    
+    await sendEmail(email, unsubscribeSubject, unsubscribeMessage);
+    res.status(201).json({ message: "Unsubscribe Email Sent", success: true, existingSubscriber });
+    next();
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" }); // Internal Server Error
+  }
+}
+
 export async function Unsubscribe(NewsletterSubscriber, token) {
   if (!token) {
     throw new Error('No token provided')
@@ -101,7 +137,7 @@ export async function Unsubscribe(NewsletterSubscriber, token) {
     }
 
     // Send confirmation email
-    const confirmationSubject = 'TBMHP Newsletter Unsubscription'
+    const confirmationSubject = 'TBMHP Newsletter Unsubscription Confirmed'
     const confirmationMessage = `
       <h1>Goodbye!</h1>
       <p>Your email has now been unsubscribed. We're sorry to see you go! If you'd like to resubscribe please do so on our <a href="${process.env.APP_BASE_URL}/">website</a>.</p> 

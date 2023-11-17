@@ -1,6 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import { Signup, Unsubscribe, Verify } from '../Controllers/NewsletterController.mjs';
+import { Signup, Unsubscribe, Verify, SendUnsubscribeToken } from '../Controllers/NewsletterController.mjs';
 import { createNewsletterSubscriberModel } from '../Models/NewsletterModel.mjs';
 
 const mongodbNewsletterConnectString = process.env.MONGODB_NEWSLETTER_CONNECT_STRING;
@@ -11,7 +11,7 @@ const NewsletterSubscriber = createNewsletterSubscriberModel(newsletterConn);
 
 const router = express.Router();
 
-router.post('/signup', (req, res, next) => Signup(NewsletterSubscriber, req, res, next));
+router.post('/signup', async (req, res, next) => Signup(NewsletterSubscriber, req, res, next));
 
 router.get('/verify/:token', async (req, res) => {
   try {
@@ -24,6 +24,8 @@ router.get('/verify/:token', async (req, res) => {
     res.redirect(`${process.env.APP_BASE_URL}/newsletter-failure?message=${encodeURIComponent(message)}`);
   }
 });
+
+router.post('/unsubscribe', async (req, res, next) => SendUnsubscribeToken(NewsletterSubscriber, req, res, next));
 
 router.get('/unsubscribe/:token', async (req, res) => {
   try {
