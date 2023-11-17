@@ -168,7 +168,7 @@ export function FooterLinks() {
       </Container>
       <Container className={classes.afterFooter}>
         <Text c="dimmed" size="sm">
-          © 2023 TBMHP Fall C467 Developers. All rights reserved.
+          © 2023 TBMHP Fall CS467 Developers. All rights reserved.
         </Text>
 
         <Group gap={0} className={classes.social} justify="flex-end" wrap="nowrap">
