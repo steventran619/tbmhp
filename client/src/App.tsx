@@ -12,6 +12,7 @@ import { Admin } from './pages/Admin/Admin';
 import { Gallery } from './pages/Gallery/Gallery';
 import NewsletterSuccess from './pages/NewsletterSuccess/NewsletterSuccess';
 import NewsletterFailure from './pages/NewsletterFailure/NewsletterFailure';
+import NewsletterUnsubscribe from './pages/NewsletterUnsubscribe/NewsletterUnsubscribe';
 import UnsubscribeSuccess from './pages/UnsubscribeSuccess/UnsubscribeSuccess';
 import UnsubscribeFailure from './pages/UnsubscribeFailure/UnsubscribeFailure';
 
@@ -55,6 +56,7 @@ export default function App() {
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/newsletter-success" element={<NewsletterSuccess />} />
                 <Route path="/newsletter-failure" element={<NewsletterFailure />} />
+                <Route path="/newsletter/unsubscribe" element={<NewsletterUnsubscribe />} />
                 <Route path="/unsubscribe-success" element={<UnsubscribeSuccess />} />
                 <Route path="/unsubscribe-failure" element={<UnsubscribeFailure />} />
               </Routes>
