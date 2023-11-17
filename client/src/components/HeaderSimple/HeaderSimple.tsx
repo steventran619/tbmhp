@@ -4,6 +4,7 @@ import { useDisclosure } from '@mantine/hooks';
 import logoImage from '../../images/logo.png';
 import classes from './HeaderSimple.module.css';
 import { Link, useLocation } from "react-router-dom";
+import { DarkMode } from '../DarkMode/DarkMode';
 
 const links = [
   { link: '/', label: 'Home' },
@@ -42,12 +43,14 @@ export function HeaderSimple() {
     <header className={classes.header}>
       <Container size="lg" className={classes.inner}>
         <Link to={'/'}>
-          <Image src={logoImage} alt="logo" w="180" fit="contain" />
+          {/* <Image src={logoImage} alt="logo" w="180" fit="contain" /> */}
+          <img src={logoImage} alt="logo" width="180"/>
         </Link>
         <div className={classes.spacer} />
         <Group gap={5} visibleFrom="xs">
           {items}
         </Group>
+        <DarkMode />
         {/* TODO: Update burger content in mobile view */}
         <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
       </Container>
