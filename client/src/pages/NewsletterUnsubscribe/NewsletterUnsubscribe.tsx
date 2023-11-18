@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast} from 'react-toastify';
-
+import classes from './NewsletterUnsubscribe.module.css';
 
 const NewsletterUnsubscribe = (): React.ReactElement => {
   const [newsletterValue, setNewsletterValue] = useState<{
@@ -58,22 +58,23 @@ const NewsletterUnsubscribe = (): React.ReactElement => {
     });
   };
   return (
-    <div className="form_container">
+    <div className={classes.form_container}>
       <h2>Unsubscribe</h2>
-      <p>Please enter your email to unsubscribe</p>
+      <p className={classes.description}>Please enter your email to unsubscribe</p>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="email">Email</label>
           <input
             type="email"
             name="email"
+            className={classes.input}
             value={email}
             required
             placeholder="Enter your email"
             onChange={handleOnChange}
           />
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" className={classes.button}>Submit</button>
       </form>
       <ToastContainer />
     </div>
