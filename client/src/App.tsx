@@ -31,16 +31,6 @@ export default function App() {
           <HeaderSimple />
           <Center style={{ minHeight: '10vh' }}>
             <Box>
-              <Title>
-                <Text
-                  size="xl"
-                  fw={900}
-                  variant="gradient"
-                  gradient={{ from: 'green', to: 'rgba(97, 43, 43, 1)', deg: 0 }}>
-                  Thomas Batterman Mental Health Project
-                </Text>
-              </Title>
-
               <br />
               <Routes>
                 <Route path="/" element={<Home />} />
