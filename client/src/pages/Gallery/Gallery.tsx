@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Image as ImageType } from '../../types';
-import { SimpleGrid, Image, Loader, Container } from '@mantine/core';
+import { SimpleGrid, Image, Loader, Container, Title } from '@mantine/core';
 import { IconExclamationCircle } from '@tabler/icons-react';
 import { CloudGallery } from '../../components/CloudGallery/CloudGallery';
 
@@ -26,9 +26,8 @@ export const Gallery = (): React.ReactElement => {
                 <span><IconExclamationCircle></IconExclamationCircle> {result.error.message}</span>
             ) : (
                 <>
-                    <a href="https://www.instagram.com/tb.mhp/">
-                        <h2>Instagram Gallery</h2>
-                    </a>
+                    <Container size="90rem">
+                    <Title order={1}>Instagram Gallery</Title>
                     <SimpleGrid
                         cols={{ base: 1, sm: 2, lg: 3 }}
                         spacing={{ base: 5, sm: 'sm' }}
@@ -47,10 +46,13 @@ export const Gallery = (): React.ReactElement => {
                                 />
                             </Container>
                         ))}
+                        
                     </SimpleGrid>
+                    <CloudGallery />
+                    </Container>
                 </>
             )}
-            <CloudGallery />
+            
         </>
     );
 }
