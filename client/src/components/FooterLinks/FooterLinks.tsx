@@ -90,7 +90,7 @@ export function FooterLinks() {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:3000/newsletter/signup",
+        `${import.meta.env.VITE_REACT_APP_API_URL}/newsletter/signup`,
         {
           ...newsletterValue,
         },
@@ -103,6 +103,7 @@ export function FooterLinks() {
         handleError(message);
       }
     } catch (error) {
+      handleError("An error occurred while submitting the form. Please try again.");
       console.log(error);
     }
     setNewsletterValue({
@@ -126,6 +127,7 @@ export function FooterLinks() {
             placeholder="Email"
             onChange={handleOnChange}
             className={classes.input}
+            required
           />
         </div>
         <div className={classes.formField}>
@@ -136,6 +138,7 @@ export function FooterLinks() {
             placeholder="First Name"
             onChange={handleOnChange}
             className={classes.input}
+            required
           />
         </div>
         <div className={classes.formField}>
@@ -146,6 +149,7 @@ export function FooterLinks() {
             placeholder="Last Name"
             onChange={handleOnChange}
             className={classes.input}
+            required
           />
         </div>
         <button type="submit" className={classes.submitButton}>Subscribe</button>
