@@ -1,30 +1,8 @@
 import nodemailer from 'nodemailer';
-import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 dotenv.config();
 
-// const token = jwt.sign({
-//     data: 'Token Data'
-//   }, process.env.TOKEN_KEY, { expiresIn: '10m' }
-// );
-
-
-
-
-
-
-async function sendVerification(firstname, email, token) {
-  const verificationTemplate = `
-  <h1>Hi ${firstname}</h1>
-  <p>Thank you for subscribing to our newsletter. 
-           Please follow the given link to verify your email 
-           http://localhost:3000/newsletter/verify/${token} 
-  </p>
-  <p>TBMHP Team</p>
-           
-  `;
-
-
+async function sendEmail(email, subject, message) {
   const mailConfigurations = { 
     // It should be a string of sender/server email 
     from: 'dillonodle@gmail.com', 
@@ -32,10 +10,10 @@ async function sendVerification(firstname, email, token) {
     to: email, 
   
     // Subject of Email 
-    subject: 'Email Verification', 
+    subject: subject, 
       
-    // This would be the text of email body 
-    html: verificationTemplate   
+    // Text of email body 
+    html: message   
   };
 
   const transporter = nodemailer.createTransport({
@@ -54,7 +32,7 @@ async function sendVerification(firstname, email, token) {
   console.log('Email Sent Successfully');
 }
 
-export { sendVerification }
+export { sendEmail }
 
 
 
