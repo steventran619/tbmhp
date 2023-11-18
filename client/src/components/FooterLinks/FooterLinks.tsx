@@ -5,22 +5,23 @@ import classes from './FooterLinks.module.css';
 import { useState, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from "react-toastify";
+import { Link } from 'react-router-dom';
 
 const data = [
   {
     title: 'About',
     links: [
-      { label: 'About Us', link: '#' },
-      { label: 'About Tom', link: '#' },
-      { label: 'Board of Directors', link: '#' },
-      { label: 'Contact', link: '#' },
+      { label: 'About Us', link: '/aboutus' },
+      { label: 'About Tom', link: '/abouttom' },
+      { label: 'Board of Directors', link: '/boardofdirectors' },
+      { label: 'Contact', link: '/contact' },
     ],
   },
   {
     title: 'Project',
     links: [
-      { label: 'Events', link: '#' },
-      { label: 'Gallery', link: '#' },
+      { label: 'Events', link: '/events' },
+      { label: 'Gallery', link: '/gallery' },
       { label: 'Donate', link: 'https://www.paypal.com/donate/?hosted_button_id=9G79KGUBH7RUW' },
     ],
   },
@@ -29,7 +30,6 @@ const data = [
     links: [
       { label: 'Facebook', link: 'https://www.facebook.com/people/Thomas-Batterman-Mental-Health-Project/100094105658144/' },
       { label: 'Instagram', link: 'https://www.instagram.com/tb.mhp/' },
-      { label: 'Subscribe Newsletter', link: '#' },
     ],
   },
 ];
@@ -46,16 +46,13 @@ export function FooterLinks() {
   })
   const { email, firstname, lastname } = newsletterValue;
   const groups = data.map((group) => {
-    const links = group.links.map((link, index) => (
-      <Text
-        key={index}
-        className={classes.link}
-        component="a"
-        href={link.link}
-      // onClick={(event) => event.preventDefault()}
-      >
-        {link.label}
-      </Text>
+    const links = group.links.map((link) => (
+      <Link
+      key={link.label}
+      to={link.link}
+      className={`${classes.link}`}    >
+      {link.label}
+    </Link>
     ));
 
     return (
