@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import classes from './Signup.module.css';
 interface InputValue {
   email: string;
   password: string;
@@ -70,7 +71,7 @@ export const Signup: React.FC = () => {
   };
 
   return (
-    <div className="form_container">
+    <div className={classes.form_container}>
       <h2>Signup Account</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -78,16 +79,18 @@ export const Signup: React.FC = () => {
           <input
             type="email"
             name="email"
+            className={classes.input}
             value={email}
             placeholder="Enter your email"
             onChange={handleOnChange}
           />
         </div>
         <div>
-          <label htmlFor="email">Username</label>
+          <label htmlFor="username">Username</label>
           <input
             type="text"
             name="username"
+            className={classes.input}
             value={username}
             placeholder="Enter your username"
             onChange={handleOnChange}
@@ -98,6 +101,7 @@ export const Signup: React.FC = () => {
           <input
             type="password"
             name="password"
+            className={classes.input}
             value={password}
             placeholder="Enter your password"
             onChange={handleOnChange}
@@ -108,15 +112,16 @@ export const Signup: React.FC = () => {
           <input
             type="password"
             name="adminPassword"
+            className={classes.input}
             value={adminPassword}
             placeholder="Enter the admin password"
             onChange={handleOnChange}
           />
         </div>
-        <button type="submit">Submit</button>
-        <span>
-          Already have an account? <Link to={"/login"}>Login</Link>
-        </span>
+        <button type="submit" className={classes.button}>Submit</button>
+        <div className={classes.signup_text}>
+          Already have an account? <Link to={"/login"} className={classes.link}>Login</Link>
+        </div>
       </form>
       <ToastContainer />
     </div>
