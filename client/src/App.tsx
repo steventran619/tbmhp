@@ -10,6 +10,7 @@ import { Login } from './pages/Login/Login';
 import { Signup } from './pages/Signup/Signup';
 import { Admin } from './pages/Admin/Admin';
 import { Gallery } from './pages/Gallery/Gallery';
+import ScrollToTop from './utils/scrollToTop';
 import NewsletterSuccess from './pages/NewsletterSuccess/NewsletterSuccess';
 import NewsletterFailure from './pages/NewsletterFailure/NewsletterFailure';
 import NewsletterUnsubscribe from './pages/NewsletterUnsubscribe/NewsletterUnsubscribe';
@@ -28,6 +29,7 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Router basename="/tbmhp">
+        <ScrollToTop />
         <MantineProvider theme={theme}>
           <HeaderSimple />
           <Center style={{ minHeight: '10vh' }}>
