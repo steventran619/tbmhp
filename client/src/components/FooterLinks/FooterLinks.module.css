@@ -54,6 +54,7 @@
   font-size: var(--mantine-font-size-sm);
   padding-top: rem(3px);
   padding-bottom: rem(3px);
+  text-decoration: none;
 
   &:hover {
     text-decoration: underline;
