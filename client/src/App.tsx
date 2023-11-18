@@ -20,6 +20,7 @@ import UnsubscribeFailure from './pages/UnsubscribeFailure/UnsubscribeFailure';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { NotFound } from "./pages/NotFound/NotFound";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ export default function App() {
             <Box>
               <br />
               <Routes>
+              <Route path='*' element={<NotFound />} />
                 <Route path="/" element={<Home />} />
                 <Route path="/aboutus" element={<AboutUs />} />
                 <Route path="/abouttom" element={<AboutTom />} />
