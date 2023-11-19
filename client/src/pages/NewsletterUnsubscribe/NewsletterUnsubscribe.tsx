@@ -1,29 +1,24 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import classes from './Login.module.css';
+import React from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
+import axios from 'axios';
+import { ToastContainer, toast} from 'react-toastify';
+import classes from './NewsletterUnsubscribe.module.css';
 
-export const Login: React.FC = () => {
-  const navigate = useNavigate();
-  const [inputValue, setInputValue] = useState<{
+const NewsletterUnsubscribe = (): React.ReactElement => {
+  const [newsletterValue, setNewsletterValue] = useState<{
     email: string;
-    password: string;
   }>({
     email: "",
-    password: "",
-  });
-
-  const { email, password } = inputValue;
+  })
+  const { email } = newsletterValue;
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setInputValue((prev) => ({
+    setNewsletterValue((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
-
   const handleError = (err: string) => {
     console.log(err);
     toast.error(err, {
@@ -41,34 +36,31 @@ export const Login: React.FC = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        `${import.meta.env.VITE_REACT_APP_API_URL}/admin/login`,
+        `${import.meta.env.VITE_REACT_APP_API_URL}/newsletter/unsubscribe`,
         {
-          ...inputValue,
+          ...newsletterValue,
         },
         { withCredentials: true }
       );
       const { success, message } = data;
       if (success) {
         handleSuccess(message);
-        setTimeout(() => {
-          navigate("/admin");
-        }, 1000);
       } else {
         handleError(message);
       }
     } catch (error) {
+      handleError("An error occurred while submitting the form. Please try again.");
       console.log(error);
     }
-    setInputValue({
-      ...inputValue,
+    setNewsletterValue({
+      ...newsletterValue,
       email: "",
-      password: "",
     });
   };
-
   return (
     <div className={classes.form_container}>
-      <h2>Login Account</h2>
+      <h2>Unsubscribe</h2>
+      <p className={classes.description}>Please enter your email to unsubscribe</p>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="email">Email</label>
@@ -77,27 +69,16 @@ export const Login: React.FC = () => {
             name="email"
             className={classes.input}
             value={email}
+            required
             placeholder="Enter your email"
             onChange={handleOnChange}
           />
         </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            className={classes.input}
-            value={password}
-            placeholder="Enter your password"
-            onChange={handleOnChange}
-          />
-        </div>
         <button type="submit" className={classes.button}>Submit</button>
-        <div className="signup-text">
-          Need to sign up? <Link to={"/signup"} className="link">Signup</Link>
-        </div>
       </form>
       <ToastContainer />
     </div>
   );
 };
+
+export default NewsletterUnsubscribe;

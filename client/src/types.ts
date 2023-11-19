@@ -7,3 +7,8 @@ export interface Image {
     __v: number;
     caption?: string;
 }
+
+export interface CloudinaryAlbum {
+    album: string;
+    images: string[];
+}
