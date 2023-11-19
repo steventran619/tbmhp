@@ -23,15 +23,11 @@ app.use(cors({
         "http://localhost:8080/tbmhp", 
         "https://steventran619.github.io/tbmhp"
     ],
-    // origin: [
-    //     "*"
-    // ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     optionsSuccessStatus: 200,
     credentials: true,
-// })); // so the frontend can talk to the backend
+})); // so the frontend can talk to the backend
 app.use(express.json());  // to support JSON-encoded bodies
-// app.use(cors());
 
 app.use(cookieParser()); // Parse cookies for auth
 app.use("/admin", authRoute); // Admin routes
