@@ -1,4 +1,5 @@
 import express from 'express';
+import mongoose from 'mongoose';
 import { Image } from '../Models/ImagesModel.mjs';
 import { connectMongo } from '../Middlewares/DbConnection.mjs';
 // import UpdateMedia from '../Controllers/InstagramController.mjs';
@@ -12,10 +13,8 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     console.log("Images requested");
     try {
-        const images = await GetInstagramImages();
-        // let connection = await connectMongo();
-        // let collection = connection.collection('images');
-        // let results = await collection.find({ Image }).toArray();
+        await connectMongo();
+        const images = await mongoose.model('Image').find();
         res.send(images).status(200);
     } catch (error) {
         console.log(error)

@@ -1,4 +1,5 @@
 import { MongoClient } from "mongodb";
+import mongoose from "mongoose";
 
 // TODO: Move dbName to .env
 // MongoDB "instagram-media" db
@@ -10,25 +11,25 @@ let conn;
 let db;
 
 async function connectMongo() {
+    // try {
+    //     conn = await client.connect();
+    //     db = conn.db(dbName);
+    //     console.log(`Connected successfully to MongoDB: ${dbName}`)
+    //     return db;
+    // } catch (e) {
+    //     console.error(e);
+    // }
     try {
-        conn = await client.connect();
-        db = conn.db(dbName);
-        console.log(`Connected successfully to MongoDB: ${dbName}`)
-        return db;
-    } catch (e) {
-        console.error(e);
+        await mongoose.connect(connectionString, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+
+        console.log('Connected to MongoDB');
+    } catch (error) {
+        console.error('MongoDB connection error:', error);
+        throw error; // Rethrow the error to handle it in the calling code
     }
 }
-// try {
-//     conn = await client.connect();
-//     db = conn.db(dbName);
-//     console.log(`Connected successfully to MongoDB: ${dbName}`)
-
-// } catch (e) {
-//     console.error(e);
-// } finally {
-//     await conn.close();
-//     // should I close it here?
-// }
 
 export { connectMongo };
