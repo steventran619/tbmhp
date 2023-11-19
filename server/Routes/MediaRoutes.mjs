@@ -15,7 +15,8 @@ router.get('/', async (req, res) => {
     try {
         await connectMongo();
         const images = await mongoose.model('Image').find();
-        res.send(images).status(200);
+        // res.send(images).status(200);
+        res.status(200).json(images);
     } catch (error) {
         console.log(error)
         res.status(400).json({ error: 'Request to retrieve document failed' });
