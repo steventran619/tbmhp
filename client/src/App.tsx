@@ -26,7 +26,7 @@ const queryClient = new QueryClient();
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Router basename="/tbmhp">
+      <Router basename="/">
         <MantineProvider theme={theme}>
           <HeaderSimple />
           <Center style={{ minHeight: '10vh' }}>
