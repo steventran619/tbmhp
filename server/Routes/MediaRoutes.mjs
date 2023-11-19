@@ -10,12 +10,14 @@ import { UpdateMedia, GetInstagramImages } from '../Controllers/InstagramControl
 // Router for "instagram-media" MongoDB db
 const router = express.Router();
 
+
+
 router.get('/', async (req, res) => {
     console.log("Images requested");
     try {
-        await connectMongo();
-        const images = await mongoose.model('Image').find();
-        // res.send(images).status(200);
+        mongoose.connect(process.env.MONGODB_CONNECT_STRING);
+        let images = await Image.find({});
+        console.log(images);
         res.status(200).json(images);
     } catch (error) {
         console.log(error)
