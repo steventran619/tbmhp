@@ -12,7 +12,6 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.json());  // to support JSON-encoded bodies
 app.use(cors({
     // origin: [
     //     "http://127.0.0.1:8080",
@@ -28,8 +27,11 @@ app.use(cors({
         "*"
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
+    optionsSuccessStatus: 200,
     credentials: true,
 })); // so the frontend can talk to the backend
+app.use(express.json());  // to support JSON-encoded bodies
+
 app.use(cookieParser()); // Parse cookies for auth
 app.use("/admin", authRoute); // Admin routes
 app.use("/newsletter", newsletterRoute); // Admin routes
