@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import classes from './Login.module.css';
 
 export const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -66,7 +67,7 @@ export const Login: React.FC = () => {
   };
 
   return (
-    <div className="form_container">
+    <div className={classes.form_container}>
       <h2>Login Account</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -74,6 +75,7 @@ export const Login: React.FC = () => {
           <input
             type="email"
             name="email"
+            className={classes.input}
             value={email}
             placeholder="Enter your email"
             onChange={handleOnChange}
@@ -84,15 +86,16 @@ export const Login: React.FC = () => {
           <input
             type="password"
             name="password"
+            className={classes.input}
             value={password}
             placeholder="Enter your password"
             onChange={handleOnChange}
           />
         </div>
-        <button type="submit">Submit</button>
-        <span>
-          Need to sign up? <Link to={"/signup"}>Signup</Link>
-        </span>
+        <button type="submit" className={classes.button}>Submit</button>
+        <div className="signup-text">
+          Need to sign up? <Link to={"/signup"} className="link">Signup</Link>
+        </div>
       </form>
       <ToastContainer />
     </div>
