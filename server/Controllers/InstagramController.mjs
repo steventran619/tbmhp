@@ -106,17 +106,17 @@ const createImage = async (media_id, media_type, media_url, caption, date) => {
 
 // Get Images from MongoDB/images collection
 async function GetInstagramImages() {
-    app.get('/instagram-images', async (req, res) => {
-        try {
-            await mongoose.connect(`${mongodbConnectString}`);
-            const images = await Image.find()
-            res.json(images).status(200);
-        } catch (error) {
-            res.status(500).json({ error: 'Request to retrieve document failed' });
-        } finally {
-            await mongoose.disconnect();
-        }
-    })
+    // app.get('/instagram-images', async (req, res) => {
+    try {
+        await mongoose.connect(`${mongodbConnectString}`);
+        const images = await Image.find()
+        // res.json(images).status(200);
+        return images;
+    } catch (error) {
+        res.status(500).json({ error: 'Request to retrieve document failed' });
+    } finally {
+        await mongoose.disconnect();
+    }
 };
 
-export default UpdateMedia;
+export { UpdateMedia, GetInstagramImages };

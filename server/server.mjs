@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser';
 import authRoute from './Routes/AuthRoute.mjs';
 import newsletterRoute from './Routes/NewsletterRoute.mjs';
 import instagramImages from './Routes/MediaRoutes.mjs';
-import UpdateMedia from './Controllers/InstagramController.mjs';
+import { UpdateMedia } from './Controllers/InstagramController.mjs';
 
 
 dotenv.config();
