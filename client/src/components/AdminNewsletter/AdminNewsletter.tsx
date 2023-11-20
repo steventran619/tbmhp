@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from "axios";
 import {  toast } from "react-toastify";
+import { NewsletterSubscriber } from '../../types';
 
 const AdminHome = (): React.ReactElement => {
 
@@ -11,7 +12,7 @@ const AdminHome = (): React.ReactElement => {
           isActive: true
         }
       });
-    const emails = data.map(subscriber => subscriber.email).join(', ');
+    const emails = (data as NewsletterSubscriber[]).map(subscriber => subscriber.email).join(', ');
     navigator.clipboard.writeText(emails);
     toast.success("Emails copied to clipboard", {
       position: "bottom-left",
