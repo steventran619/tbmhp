@@ -11,7 +11,7 @@ This project setting up a website for the Thomas Batterman Mental Health Project
 https://www.tbmhp.org
 
 ## Homebrew Page In Work:
-https://steventran619.github.io/tbmhp/
+https://main.d2g07unwlxox5e.amplifyapp.com/
 
 ## Objectives
 
