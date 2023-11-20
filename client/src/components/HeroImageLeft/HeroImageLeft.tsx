@@ -1,4 +1,4 @@
-import { Image, Container, Title, Button, Group, Text, List, ThemeIcon, rem, Stack } from '@mantine/core';
+import { Image, Container, Title, Button, Group, Text, Stack } from '@mantine/core';
 import { IconBrandPaypal } from '@tabler/icons-react';
 import classes from './HeroImageLeft.module.css';
 

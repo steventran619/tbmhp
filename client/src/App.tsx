@@ -1,5 +1,5 @@
 import "@mantine/core/styles.css";
-import { MantineProvider, Title, Text, Center, Box } from "@mantine/core";
+import { MantineProvider, Center, Box } from "@mantine/core";
 import { theme } from "./theme";
 import { HeaderSimple } from './components/HeaderSimple/HeaderSimple';
 import { FooterLinks } from './components/FooterLinks/FooterLinks';
