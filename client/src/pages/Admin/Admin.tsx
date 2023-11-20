@@ -5,7 +5,7 @@ import axios from "axios";
 import { AdminNav } from '../../components/AdminNav/AdminNav';
 import AdminHome from '../../components/AdminHome/AdminHome';
 import AdminNewsletter from '../../components/AdminNewsletter/AdminNewsletter';
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import classes from './Admin.module.css';
 
 export const Admin: FC = () => {
