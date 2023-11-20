@@ -4,6 +4,7 @@ import { useCookies } from "react-cookie";
 import axios from "axios";
 import { AdminNav } from '../../components/AdminNav/AdminNav';
 import AdminHome from '../../components/AdminHome/AdminHome';
+import AdminNewsletter from '../../components/AdminNewsletter/AdminNewsletter';
 import { ToastContainer, toast } from "react-toastify";
 import classes from './Admin.module.css';
 
@@ -27,9 +28,6 @@ export const Admin: FC = () => {
         );
         if (data.status && data.user) {
           setUsername(data.user);
-          toast(`Hello ${data.user}`, {
-            position: "top-right",
-          });
         } else {
           removeCookie("token", { path: "/" });
           navigate("/login");
@@ -59,6 +57,7 @@ export const Admin: FC = () => {
       <div className={classes.admin_page}>
         <Routes>
           <Route path="" element={<AdminHome username={username}/>}/>
+          <Route path="/newsletter" element={<AdminNewsletter />}/>
         </Routes>
         
       </div>

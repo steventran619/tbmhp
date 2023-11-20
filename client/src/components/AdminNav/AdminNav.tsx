@@ -7,6 +7,7 @@ import classes from './AdminNav.module.css';
 
 const data = [
   { link: '/admin', label: 'Home' },
+  { link: '/admin/newsletter', label: 'Newsletter' },
 ];
 
 export function AdminNav() {
