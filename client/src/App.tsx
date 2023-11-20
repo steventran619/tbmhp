@@ -47,7 +47,7 @@ export default function App() {
                 <Route path="/contact" />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
-                <Route path="/admin" element={<Admin />} />
+                <Route path="/admin/*" element={<Admin />} />
                 <Route path="/newsletter-success" element={<NewsletterSuccess />} />
                 <Route path="/newsletter-failure" element={<NewsletterFailure />} />
                 <Route path="/newsletter/unsubscribe" element={<NewsletterUnsubscribe />} />
