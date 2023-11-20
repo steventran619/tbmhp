@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import authRoute from './Routes/AuthRoute.mjs';
 import newsletterRoute from './Routes/NewsletterRoute.mjs';
 import instagramImages from './Routes/MediaRoutes.mjs';
+import UpdateMedia from './Controllers/InstagramController.mjs';
 
 
 dotenv.config();
@@ -37,6 +38,6 @@ app.use((err, _req, res, next) => {
 app.listen(PORT || 3000, () => {
     console.log(`Server listening on http://localhost:${PORT}...`);
     // dropCollection('media');
-    // UpdateMediaInMongoDB();
+    // UpdateMedia();
     // main().catch(err => console.log(err));
 });
