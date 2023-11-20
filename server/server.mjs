@@ -18,7 +18,8 @@ app.use(cors({
         "http://127.0.0.1:8080",
         "http://localhost:5173", 
         "http://localhost:8080", 
-        "https://steventran619.github.io/tbmhp"
+        "https://steventran619.github.io/tbmhp",
+        "https://main.d2g07unwlxox5e.amplifyapp.com/"
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
