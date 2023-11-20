@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Group, Code } from '@mantine/core';
+import { Group } from '@mantine/core';
 import { useCookies } from "react-cookie";
 
 import classes from './AdminNav.module.css';
