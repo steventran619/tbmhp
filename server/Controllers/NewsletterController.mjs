@@ -153,3 +153,15 @@ export async function Unsubscribe(NewsletterSubscriber, token) {
     throw error;
   }
 }
+
+export async function GetSubscribers(NewsletterSubscriber, req, res, next) {
+  const isActive = req.query.isActive === 'true';
+  let documents;
+  if (isActive) {
+    documents = await NewsletterSubscriber.find({active: true});
+  } else {
+    documents = await NewsletterSubscriber.find({});
+  }
+  return documents;
+  
+}
