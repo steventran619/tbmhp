@@ -23,8 +23,8 @@ router.get('/', async (req, res) => {
 
 router.get('/update', async(req, res) => {
     try {
-        let mediaResults = UpdateMedia();
-        res.send(mediaResults).status(200);
+        await UpdateMedia();
+        res.send("Instagram media links updated successfully").status(200);
     } catch (error) {
         console.log(error);
         res.status(400).json({ error: 'Request to retrieve document failed' });
