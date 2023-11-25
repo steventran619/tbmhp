@@ -15,6 +15,7 @@ import {
 import { useClipboard } from '@mantine/hooks';
 import { IconCopy, IconCheck, IconSelector, IconChevronDown, IconChevronUp, IconSearch } from '@tabler/icons-react';
 import classes from './AdminNewsletter.module.css';
+import { NewsletterSubscriber } from '../../types';
 
 interface RowData {
   id: string;
@@ -80,13 +81,13 @@ function sortData(
   const { sortBy, reversed, search } = payload;
 
   // First, filter the data based on the search criteria.
-  let result = filterData(data, search);
+  const result = filterData(data, search);
 
   // If a sortBy key is provided, sort the data.
   if (sortBy) {
     result.sort((a, b) => {
-      let aValue = a[sortBy];
-      let bValue = b[sortBy];
+      const aValue = a[sortBy];
+      const bValue = b[sortBy];
 
       // Check if the values are strings and use localeCompare for sorting.
       if (typeof aValue === 'string' && typeof bValue === 'string') {
@@ -158,7 +159,7 @@ const AdminHome = (): React.ReactElement => {
       `${import.meta.env.VITE_REACT_APP_API_URL}/newsletter/subscribers`);
     
     // Map the data to conform to the RowData structure
-    return data.map((subscriber: any) => ({
+    return data.map((subscriber: NewsletterSubscriber) => ({
       id: subscriber._id, // Adjust this line to map _id to id
       firstname: subscriber.firstname,
       lastname: subscriber.lastname,
