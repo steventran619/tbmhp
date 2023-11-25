@@ -9,7 +9,6 @@ import { DarkMode } from '../DarkMode/DarkMode';
 const links = [
   { link: '/', label: 'Home' },
   { link: '/aboutus', label: 'About Us' },
-  { link: '/abouttom', label: 'About Tom' },
   { link: '/boardofdirectors', label: 'Board of Directors' },
   { link: '/events', label: 'Events' },
   { link: '/gallery', label: 'Gallery' },

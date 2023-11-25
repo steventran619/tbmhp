@@ -41,8 +41,7 @@ export default function App() {
               <Routes>
               <Route path='*' element={<NotFound />} />
                 <Route path="/" element={<Home />} />
-                <Route path="/aboutus" element={<AboutUs />} />
-                <Route path="/abouttom" element={<AboutTom />} />
+                <Route path="/aboutus" element={<AboutTom />}/>
                 <Route path="/boardofdirectors" element={<BoardOfDirectors />}/>
                 <Route path="/events" element={<Events />} />
                 <Route path="/gallery" element={<Gallery />} />
