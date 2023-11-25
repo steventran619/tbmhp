@@ -54,10 +54,10 @@ export const Events = (): React.ReactElement => {
                                 className={classes.container}
                                 cols={{ base: 1, sm: 2, lg: 3 }}
                                 spacing={{ base: 5, sm: 'sm' }}
-                                verticalSpacing={{ base: 'sm', sm: 'md' }}>
+                                verticalSpacing={{ base: 'xl', sm: 'sm' }}>
                                 {result.data?.events.map((event: Event) => (
                                     <Container key={event.id} size="450">
-                                        <Card shadow="sm" padding="lg" radius="md" withBorder>
+                                        <Card shadow="sm" padding="lg" radius="md" withBorder className={classes.card}>
                                             <Card.Section component="a" href={event.url}>
                                                 <Image
                                                     src={event.logo.url}
@@ -68,7 +68,7 @@ export const Events = (): React.ReactElement => {
                                             </Card.Section>
                                             <Group justify="space-between" mt="md" mb="xs">
                                                 <Text fw={500}>{event.name.text}</Text>
-                                                <Badge color="green" variant="light">
+                                                <Badge color="teal" variant="light">
                                                     {localDateTimeToDate(event.start.local)}
                                                 </Badge>
                                             </Group>
@@ -105,10 +105,10 @@ export const Events = (): React.ReactElement => {
                         className={classes.container}
                         cols={{ base: 1, sm: 2, lg: 3 }}
                         spacing={{ base: 5, sm: 'sm' }}
-                        verticalSpacing={{ base: 'sm', sm: 'md' }}>
+                        verticalSpacing={{ base: 'xl', sm: 'sm' }}>
                         {pastEventsQuery.data.events.map((event: Event) => (
                             <Container key={event.id} size="450">
-                                <Card shadow="sm" padding="lg" radius="md" withBorder>
+                                <Card shadow="sm" padding="lg" radius="md" withBorder className={classes.card}>
                                     <Card.Section>
                                         <Image
                                             src={event.logo.url}
@@ -120,7 +120,7 @@ export const Events = (): React.ReactElement => {
                                     </Card.Section>
                                     <Group justify="space-between" mt="md" mb="xs">
                                         <Text fw={500}>{event.name.text}</Text>
-                                        <Badge color="green" variant="light">
+                                        <Badge color="teal" variant="light">
                                             {localDateTimeToDate(event.start.local)}
                                         </Badge>
                                     </Group>
