@@ -1,9 +1,10 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Image as ImageType } from '../../types';
-import { SimpleGrid, Image, Loader, Container, Title } from '@mantine/core';
+import { SimpleGrid, Image, Loader, Container, Title, Space } from '@mantine/core';
 import { IconExclamationCircle } from '@tabler/icons-react';
 import { CloudGallery } from '../../components/CloudGallery/CloudGallery';
+import classes from './Gallery.module.css';
 
 
 export const Gallery = (): React.ReactElement => {
@@ -27,20 +28,21 @@ export const Gallery = (): React.ReactElement => {
             ) : (
                 <>
                     <Container size="90rem">
-                    <Title order={1}>Instagram Gallery</Title>
+                    <Title order={1} ta="center">Instagram Gallery</Title>
+                    <Space h="md" />
                     <SimpleGrid
                         cols={{ base: 1, sm: 2, lg: 3 }}
-                        spacing={{ base: 5, sm: 'sm' }}
+                        spacing={{ base: 5, sm: 'xl' }}
                         verticalSpacing={{ base: 'sm', sm: 'md' }}>
                         {result.data?.map((image: ImageType) => (
                             <Container key={image.id} size="450">
                                 <Image radius="md"
                                     key={image.id}
-                                    // w="450"
                                     h="450"
-                                    // fit="contain"
+                                    fit="cover"
                                     src={image.media_url}
                                     alt={image.caption}
+                                    className = {classes.image}
                                     onClick={() => (window.location.href = image.media_url)}
                                 // TODO: Add css for clickable cursor
                                 />
