@@ -1,0 +1,7 @@
+.container {
+  padding: 2em;
+}
+
+.dullImage {
+    filter: grayscale(100%);
+}

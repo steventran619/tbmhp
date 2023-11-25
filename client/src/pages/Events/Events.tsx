@@ -4,6 +4,7 @@ import { OrganizationEvents, Event, Start } from '../../types';
 import { SimpleGrid, Card, Image, Loader, Container, Title, Text, Badge, Button, Group } from '@mantine/core';
 import { IconExclamationCircle } from '@tabler/icons-react';
 import events_blank from '../../images/events_blank.jpg';
+import classes from './Events.module.css';
 
 
 export const Events = (): React.ReactElement => {
@@ -12,9 +13,20 @@ export const Events = (): React.ReactElement => {
         return res.json();
     };
 
+    const getPastEvents = async () => {
+        const res = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/events/past`);
+        return res.json();
+    };
+
     const result = useQuery({
         queryKey: ['events'],
         queryFn: getUpcomingEvents,
+        staleTime: 1000 * 60 * 5 // 5 minute cache
+    })
+
+    const pastEventsQuery = useQuery({
+        queryKey: ['pastEvents'],
+        queryFn: getPastEvents,
         staleTime: 1000 * 60 * 5 // 5 minute cache
     })
 
@@ -30,12 +42,12 @@ export const Events = (): React.ReactElement => {
     return (
         <>
             {result.isLoading ? (
-                <Loader color="rgba(53, 128, 10, 1)" type="bars" />
+                <Loader color="gray" type="dots" />
             ) : result.isError ? (
                 <span><IconExclamationCircle></IconExclamationCircle> {result.error.message}</span>
             ) : (
                 <>
-                    <Container size="90rem">
+                    <Container size="90rem" className={classes.container}>
                         <Title order={1}>Events</Title>
                         <SimpleGrid
                             cols={{ base: 1, sm: 2, lg: 3 }}
@@ -46,7 +58,8 @@ export const Events = (): React.ReactElement => {
                                     <Card shadow="sm" padding="lg" radius="md" withBorder>
                                         <Card.Section component="a" href={event.url}>
                                             <Image
-                                                src={event.logo.url ? event.logo.url : events_blank}
+                                                src={event.logo.url}
+                                                fallbackSrc={events_blank}
                                                 height={160}
                                                 alt=""
                                             />
@@ -62,13 +75,70 @@ export const Events = (): React.ReactElement => {
                                             {event.description.text}
                                         </Text>
 
-                                        <Button variant="light" color="blue" fullWidth mt="md" radius="md" onClick={() => window.location.href = `${event.url}`}>
+                                        <Button variant="light"
+                                            color={event.is_free ? "green" : "blue"}
+                                            fullWidth mt="md"
+                                            radius="md"
+                                            onClick={() => window.location.href = `${event.url}`}>
                                             {event.is_free ? 'Free Registration' : 'Purchase Tickets'}
                                         </Button>
                                     </Card>
                                 </Container>
                             ))}
                         </SimpleGrid>
+                    </Container>
+                </>
+            )}
+            {/* Past Events */}
+            {pastEventsQuery.isLoading ? (
+                <></>
+            ) : pastEventsQuery.isError ? (
+                <span><IconExclamationCircle></IconExclamationCircle> {pastEventsQuery.error.message}</span>
+            ) : (
+                <>
+                    <Container size="90rem" className={classes.container}>
+                        <Title order={1}>Past Events</Title>
+                        {pastEventsQuery.data?.events.length > 0 ? (
+                            <SimpleGrid
+                                cols={{ base: 1, sm: 2, lg: 3 }}
+                                spacing={{ base: 5, sm: 'sm' }}
+                                verticalSpacing={{ base: 'sm', sm: 'md' }}>
+                                {pastEventsQuery.data?.events.map((event: Event) => (
+                                    <Container key={event.id} size="450">
+                                        <Card shadow="sm" padding="lg" radius="md" withBorder>
+                                            <Card.Section>
+                                                <Image
+                                                    src={event.logo.url}
+                                                    fallbackSrc={events_blank}
+                                                    height={160}
+                                                    alt=""
+                                                    className={classes.dullImage}
+                                                />
+                                            </Card.Section>
+                                            <Group justify="space-between" mt="md" mb="xs">
+                                                <Text fw={500}>{event.name.text}</Text>
+                                                <Badge color="green" variant="light">
+                                                    {localDateTimeToDate(event.start.local)}
+                                                </Badge>
+                                            </Group>
+
+                                            <Text size="sm" c="dimmed" lineClamp={4}>
+                                                {event.description.text}
+                                            </Text>
+
+                                            <Button variant="light" color="blue"
+                                                fullWidth mt="md"
+                                                radius="md"
+                                                data-disabled
+                                                onClick={(event) => event.preventDefault()}>
+                                                {event.is_free ? 'Free Registration' : 'Purchase Tickets'}
+                                            </Button>
+                                        </Card>
+                                    </Container>
+                                ))}
+                            </SimpleGrid>) :
+                            (<Text span>No past events found.</Text>)
+                        }
                     </Container>
                 </>
             )}
