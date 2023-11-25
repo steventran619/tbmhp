@@ -5,6 +5,7 @@ import { HeaderSimple } from './components/HeaderSimple/HeaderSimple';
 import { FooterLinks } from './components/FooterLinks/FooterLinks';
 import { Home } from './pages/Home/Home';
 import { AboutTom } from './pages/AboutTom/AboutTom';
+import { BoardOfDirectors } from './pages/BoardOfDirectors/BoardOfDirectors';
 import { AboutUs } from './pages/AboutUs/AboutUs';
 import { Login } from './pages/Login/Login';
 import { Signup } from './pages/Signup/Signup';
@@ -23,6 +24,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { NotFound } from "./pages/NotFound/NotFound";
+import { Contact } from "./pages/Contact/Contact";
 
 const queryClient = new QueryClient();
 
@@ -41,11 +43,11 @@ export default function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/aboutus" element={<AboutUs />} />
                 <Route path="/abouttom" element={<AboutTom />} />
-                <Route path="/boardofdirectors" />
+                <Route path="/boardofdirectors" element={<BoardOfDirectors />}/>
                 <Route path="/events" element={<Events />} />
                 <Route path="/gallery" element={<Gallery />} />
                 <Route path="/donate" />
-                <Route path="/contact" />
+                <Route path="/contact" element={<Contact />}/>
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/admin/*" element={<Admin />} />
