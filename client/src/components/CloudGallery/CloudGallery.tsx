@@ -1,8 +1,10 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { CloudinaryAlbum } from '../../types';
-import { SimpleGrid, Image, Loader, Divider } from '@mantine/core';
+import { SimpleGrid, Image, Loader, Divider, Title, Space } from '@mantine/core';
 import { titleCase } from '../../utils/titleCase';
+import missing from '../../images/image-missing.svg';
+import classes from './CloudGallery.module.css';
 
 
 export const CloudGallery = (): React.ReactElement => {
@@ -34,7 +36,8 @@ export const CloudGallery = (): React.ReactElement => {
             {result.data?.map((album: CloudinaryAlbum, index: number) => (
                 <div key={index}>
                     <Divider my="xl" size="md"/>
-                    <h2>{titleCase(album?.album)}</h2>
+                    <Title order={1} ta="center">{titleCase(album?.album)}</Title>
+                    <Space h="md" />
                     <SimpleGrid
                         cols={{ base: 1, sm: 2, lg: 3 }}
                         spacing={{ base: 5, sm: 'xl' }}
@@ -42,11 +45,12 @@ export const CloudGallery = (): React.ReactElement => {
                         {album.images.map((imageUrl, imageIndex) => (
                             <Image radius="md"
                             key={imageIndex}
-                            w="450"
                             h="450"
-                            fit="contain"
+                            fit="cover"
                             src={imageUrl}
+                            fallbackSrc={missing}
                             alt="Image"
+                            className = {classes.image}
                             onClick={() => (window.location.href = imageUrl)}
                         />
                     ))}
