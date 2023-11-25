@@ -44,75 +44,27 @@ export const Events = (): React.ReactElement => {
             {result.isLoading ? (
                 <Loader color="gray" type="dots" />
             ) : result.isError ? (
-                <span><IconExclamationCircle></IconExclamationCircle> {result.error.message}</span>
+                <Text span><IconExclamationCircle></IconExclamationCircle> {result.error.message}</Text>
             ) : (
                 <>
                     <Container size="90rem" className={classes.container}>
                         <Title order={1}>Events</Title>
-                        <SimpleGrid
-                            cols={{ base: 1, sm: 2, lg: 3 }}
-                            spacing={{ base: 5, sm: 'sm' }}
-                            verticalSpacing={{ base: 'sm', sm: 'md' }}>
-                            {result.data?.events.map((event: Event) => (
-                                <Container key={event.id} size="450">
-                                    <Card shadow="sm" padding="lg" radius="md" withBorder>
-                                        <Card.Section component="a" href={event.url}>
-                                            <Image
-                                                src={event.logo.url}
-                                                fallbackSrc={events_blank}
-                                                height={160}
-                                                alt=""
-                                            />
-                                        </Card.Section>
-                                        <Group justify="space-between" mt="md" mb="xs">
-                                            <Text fw={500}>{event.name.text}</Text>
-                                            <Badge color="green" variant="light">
-                                                {localDateTimeToDate(event.start.local)}
-                                            </Badge>
-                                        </Group>
+                        {result.data?.events.length > 0 ? (
 
-                                        <Text size="sm" c="dimmed" lineClamp={4}>
-                                            {event.description.text}
-                                        </Text>
-
-                                        <Button variant="light"
-                                            color={event.is_free ? "green" : "blue"}
-                                            fullWidth mt="md"
-                                            radius="md"
-                                            onClick={() => window.location.href = `${event.url}`}>
-                                            {event.is_free ? 'Free Registration' : 'Purchase Tickets'}
-                                        </Button>
-                                    </Card>
-                                </Container>
-                            ))}
-                        </SimpleGrid>
-                    </Container>
-                </>
-            )}
-            {/* Past Events */}
-            {pastEventsQuery.isLoading ? (
-                <></>
-            ) : pastEventsQuery.isError ? (
-                <span><IconExclamationCircle></IconExclamationCircle> {pastEventsQuery.error.message}</span>
-            ) : (
-                <>
-                    <Container size="90rem" className={classes.container}>
-                        <Title order={1}>Past Events</Title>
-                        {pastEventsQuery.data?.events.length > 0 ? (
                             <SimpleGrid
+                                className={classes.container}
                                 cols={{ base: 1, sm: 2, lg: 3 }}
                                 spacing={{ base: 5, sm: 'sm' }}
                                 verticalSpacing={{ base: 'sm', sm: 'md' }}>
-                                {pastEventsQuery.data?.events.map((event: Event) => (
+                                {result.data?.events.map((event: Event) => (
                                     <Container key={event.id} size="450">
                                         <Card shadow="sm" padding="lg" radius="md" withBorder>
-                                            <Card.Section>
+                                            <Card.Section component="a" href={event.url}>
                                                 <Image
                                                     src={event.logo.url}
                                                     fallbackSrc={events_blank}
                                                     height={160}
                                                     alt=""
-                                                    className={classes.dullImage}
                                                 />
                                             </Card.Section>
                                             <Group justify="space-between" mt="md" mb="xs">
@@ -126,22 +78,72 @@ export const Events = (): React.ReactElement => {
                                                 {event.description.text}
                                             </Text>
 
-                                            <Button variant="light" color="blue"
+                                            <Button variant="light"
+                                                color={event.is_free ? "green" : "blue"}
                                                 fullWidth mt="md"
                                                 radius="md"
-                                                data-disabled
-                                                onClick={(event) => event.preventDefault()}>
+                                                onClick={() => window.location.href = `${event.url}`}>
                                                 {event.is_free ? 'Free Registration' : 'Purchase Tickets'}
                                             </Button>
                                         </Card>
                                     </Container>
                                 ))}
-                            </SimpleGrid>) :
-                            (<Text span>No past events found.</Text>)
-                        }
+                            </SimpleGrid>) : (
+                            <Text span>No upcoming events found.</Text>
+                        )}
                     </Container>
                 </>
             )}
+            {/* Past Events */}
+            {pastEventsQuery.isLoading ? (
+                <></>
+            ) : pastEventsQuery.isError ? (
+                <Text span><IconExclamationCircle></IconExclamationCircle> {pastEventsQuery.error.message}</Text>
+            ) : pastEventsQuery.data.events.length > 0 ? (
+                <Container size="90rem" className={classes.container}>
+                    <Title order={1}>Past Events</Title>
+                    <SimpleGrid
+                        className={classes.container}
+                        cols={{ base: 1, sm: 2, lg: 3 }}
+                        spacing={{ base: 5, sm: 'sm' }}
+                        verticalSpacing={{ base: 'sm', sm: 'md' }}>
+                        {pastEventsQuery.data.events.map((event: Event) => (
+                            <Container key={event.id} size="450">
+                                <Card shadow="sm" padding="lg" radius="md" withBorder>
+                                    <Card.Section>
+                                        <Image
+                                            src={event.logo.url}
+                                            fallbackSrc={events_blank}
+                                            height={160}
+                                            alt=""
+                                            className={classes.dullImage}
+                                        />
+                                    </Card.Section>
+                                    <Group justify="space-between" mt="md" mb="xs">
+                                        <Text fw={500}>{event.name.text}</Text>
+                                        <Badge color="green" variant="light">
+                                            {localDateTimeToDate(event.start.local)}
+                                        </Badge>
+                                    </Group>
+
+                                    <Text size="sm" c="dimmed" lineClamp={4}>
+                                        {event.description.text}
+                                    </Text>
+
+                                    <Button variant="light" color="blue"
+                                        fullWidth mt="md"
+                                        radius="md"
+                                        data-disabled
+                                        onClick={(event) => event.preventDefault()}>
+                                        {event.is_free ? 'Free Registration' : 'Purchase Tickets'}
+                                    </Button>
+                                </Card>
+                            </Container>
+                        ))}
+                    </SimpleGrid>
+                </Container>) :
+                (<div id="no-past-events"></div>)
+            }
         </>
     );
 }
