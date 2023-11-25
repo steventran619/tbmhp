@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { OrganizationEvents, Event, Start } from '../../types';
+import { Event } from '../../types';
 import { SimpleGrid, Card, Image, Loader, Container, Title, Text, Badge, Button, Group } from '@mantine/core';
 import { IconExclamationCircle } from '@tabler/icons-react';
 import events_blank from '../../images/events_blank.jpg';
@@ -48,9 +48,8 @@ export const Events = (): React.ReactElement => {
             ) : (
                 <>
                     <Container size="90rem" className={classes.container}>
-                        <Title order={1}>Events</Title>
+                        <Title order={1} ta="center">Events</Title>
                         {result.data?.events.length > 0 ? (
-
                             <SimpleGrid
                                 className={classes.container}
                                 cols={{ base: 1, sm: 2, lg: 3 }}
@@ -89,7 +88,7 @@ export const Events = (): React.ReactElement => {
                                     </Container>
                                 ))}
                             </SimpleGrid>) : (
-                            <Text span>No upcoming events found.</Text>
+                            <Text span ta="center">No upcoming events found.</Text>
                         )}
                     </Container>
                 </>
@@ -101,7 +100,7 @@ export const Events = (): React.ReactElement => {
                 <Text span><IconExclamationCircle></IconExclamationCircle> {pastEventsQuery.error.message}</Text>
             ) : pastEventsQuery.data.events.length > 0 ? (
                 <Container size="90rem" className={classes.container}>
-                    <Title order={1}>Past Events</Title>
+                    <Title order={1} ta="center">Past Events</Title>
                     <SimpleGrid
                         className={classes.container}
                         cols={{ base: 1, sm: 2, lg: 3 }}
