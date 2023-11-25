@@ -12,7 +12,6 @@ const data = [
     title: 'About',
     links: [
       { label: 'About Us', link: '/aboutus' },
-      { label: 'About Tom', link: '/abouttom' },
       { label: 'Board of Directors', link: '/boardofdirectors' },
       { label: 'Contact', link: '/contact' },
     ],
