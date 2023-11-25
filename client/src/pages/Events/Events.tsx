@@ -5,6 +5,7 @@ import { SimpleGrid, Card, Image, Loader, Container, Title, Text, Badge, Button,
 import { IconExclamationCircle } from '@tabler/icons-react';
 import events_blank from '../../images/events_blank.jpg';
 import classes from './Events.module.css';
+import { localDateTimeToDate } from '../../utils/localDateTimeToDate';
 
 
 export const Events = (): React.ReactElement => {
@@ -29,15 +30,6 @@ export const Events = (): React.ReactElement => {
         queryFn: getPastEvents,
         staleTime: 1000 * 60 * 5 // 5 minute cache
     })
-
-    function localDateTimeToDate(eventDateTime: string) {
-        const date = new Date(eventDateTime);
-        return date.toLocaleDateString('en-US', {
-            month: '2-digit',
-            day: '2-digit',
-            year: 'numeric',
-        });
-    }
 
     return (
         <>
