@@ -9,6 +9,7 @@ import { AboutUs } from './pages/AboutUs/AboutUs';
 import { Login } from './pages/Login/Login';
 import { Signup } from './pages/Signup/Signup';
 import { Admin } from './pages/Admin/Admin';
+import { Events } from './pages/Events/Events';
 import { Gallery } from './pages/Gallery/Gallery';
 import ScrollToTop from './utils/scrollToTop';
 import NewsletterSuccess from './pages/NewsletterSuccess/NewsletterSuccess';
@@ -41,7 +42,7 @@ export default function App() {
                 <Route path="/aboutus" element={<AboutUs />} />
                 <Route path="/abouttom" element={<AboutTom />} />
                 <Route path="/boardofdirectors" />
-                <Route path="/events" />
+                <Route path="/events" element={<Events />} />
                 <Route path="/gallery" element={<Gallery />} />
                 <Route path="/donate" />
                 <Route path="/contact" />
