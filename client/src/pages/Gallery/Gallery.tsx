@@ -38,6 +38,7 @@ export const Gallery = (): React.ReactElement => {
                             <Container key={image.id} size="450">
                                 <Image radius="md"
                                     key={image.id}
+                                    // w="450"
                                     h="450"
                                     fit="cover"
                                     src={image.media_url}
