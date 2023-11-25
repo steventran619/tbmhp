@@ -3,7 +3,7 @@ export interface Image {
     id: string;
     media_type: string;
     media_url: string;
-    children: any[];
+    // children: any[];
     __v: number;
     caption?: string;
 }
