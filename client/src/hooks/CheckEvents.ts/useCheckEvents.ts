@@ -18,7 +18,6 @@ export default function useCheckEvents() {
     })
 
     useEffect(() => {
-        console.log("Use Effect for checking upcoming");
         if (result.data) {
             setEvents(result.data.events);
         }
