@@ -6,7 +6,7 @@ export function HeroImageLeft() {
   return (
     <Container fluid>
       <div className={classes.inner}>
-        <Image src="https://tbmhp.org/wp-content/uploads/2023/05/Driveway-2-scaled.jpg" className={classes.image} radius="sm" />
+        <Image src="https://res.cloudinary.com/dews5utjs/image/upload/v1701029407/tbmhp_board/Driveway-2-scaled_hlp33l.jpg" className={classes.image} radius="sm" alt="driveway toward forest with flowers"/>
         <div className={classes.content}>
           <Title className={classes.title}>
             <i>A PATH TO WELLNESS</i>
