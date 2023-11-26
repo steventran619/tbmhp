@@ -42,8 +42,7 @@ export function HeaderSimple() {
     <header className={classes.header}>
       <Container size="lg" className={classes.inner}>
         <Link to={'/'}>
-          {/* <Image src={logoImage} alt="logo" w="180" fit="contain" /> */}
-          <img src={logoImage} alt="logo" width="180"/>
+          <img src={logoImage} alt="tbmhp logo" width="180"/>
         </Link>
         <div className={classes.spacer} />
         <Group gap={5} visibleFrom="xs">
