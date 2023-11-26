@@ -8,4 +8,5 @@ font-family: Greycliff CF, var(--mantine-font-family);
 
 .wrapper{
     margin: 3em;
+    max-width: 90em;
 }
