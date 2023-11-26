@@ -1,41 +1,23 @@
-.card {
-    height: rem(300px);
-    /* background-size: cover;
-    background-position: center; */
+.wrapper{
+  margin-top: 2em;
+}
+
+.container {
+  margin-top: 1em;
+  padding: 2em;
+}
+
+.title {
+  color: var(--mantine-color-white);
+  font-family: Greycliff CF, var(--mantine-font-family);
+  font-weight: 900;
+  line-height: 1.05;
+  max-width: rem(500px);
+  font-size: rem(48px);
+
+  @media (max-width: $mantine-breakpoint-md) {
+    max-width: 100%;
+    font-size: rem(34px);
+    line-height: 1.15;
   }
-  
-  .content {
-    position: absolute;
-    left: 20em;
-    inset: 0;
-    padding: var(--mantine-spacing-xl);
-    z-index: 1;
-  }
-  
-  .action {
-    position: absolute;
-    bottom: var(--mantine-spacing-xl);
-    right: var(--mantine-spacing-xl);
-  }
-  
-  .title {
-    color: var(--mantine-color-white);
-    margin-bottom: calc(var(--mantine-spacing-xs) / 2);
-  }
-  
-  .description {
-    
-    color: var(--mantine-color-white);
-    max-width: rem(340px);
-    
-  }
-  
-  .overlay {
-    background-color: transparent;
-    background-image: linear-gradient(
-      105deg,
-      var(--mantine-color-black) 20%,
-      #312f2f 50%,
-      var(--mantine-color-gray-4) 100%
-    );
-  }
+}
