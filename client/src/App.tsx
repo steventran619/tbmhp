@@ -4,9 +4,8 @@ import { theme } from "./theme";
 import { HeaderSimple } from './components/HeaderSimple/HeaderSimple';
 import { FooterLinks } from './components/FooterLinks/FooterLinks';
 import { Home } from './pages/Home/Home';
-import { AboutTom } from './pages/AboutTom/AboutTom';
-import { BoardOfDirectors } from './pages/BoardOfDirectors/BoardOfDirectors';
 import { AboutUs } from './pages/AboutUs/AboutUs';
+import { BoardOfDirectors } from './pages/BoardOfDirectors/BoardOfDirectors';
 import { Login } from './pages/Login/Login';
 import { Signup } from './pages/Signup/Signup';
 import { Admin } from './pages/Admin/Admin';
@@ -41,7 +40,7 @@ export default function App() {
               <Routes>
               <Route path='*' element={<NotFound />} />
                 <Route path="/" element={<Home />} />
-                <Route path="/aboutus" element={<AboutTom />}/>
+                <Route path="/aboutus" element={<AboutUs />}/>
                 <Route path="/boardofdirectors" element={<BoardOfDirectors />}/>
                 <Route path="/events" element={<Events />} />
                 <Route path="/gallery" element={<Gallery />} />
