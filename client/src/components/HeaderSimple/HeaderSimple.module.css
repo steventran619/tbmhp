@@ -1,18 +1,16 @@
 .header {
-    height: rem(106px);
-    margin-bottom: rem(10px);
+    height: auto;
+    margin-bottom: rem(1px);
     background-color: var(--mantine-color-body);
     border-bottom: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
 }
 
 .inner {
-    height: rem(100px);
+    /* height: rem(100px); */
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
 }
-
-
 
 .link {
     display: block;
@@ -36,4 +34,15 @@
 
 .img {
     background-color: white;
+}
+
+.mobileMenu{
+    display: flex-wrap;
+    align-items: center;
+    .link {
+        width: 100%;
+        line-height: 1;
+        border-radius: 0;
+        text-align: center;        
+    }
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Container, Group, Burger } from '@mantine/core';
+import { Container, Group, Burger, Stack } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import logoImage from '../../images/logo.png';
 import classes from './HeaderSimple.module.css';
@@ -33,6 +33,7 @@ export function HeaderSimple() {
       to={link.link}
       className={`${classes.link} ${active === link.link ? "active" : ""}`}
       data-active={active === link.link || undefined} // used to highlight the active link
+      onClick={() => toggle()}
     >
       {link.label}
     </Link>
@@ -49,9 +50,14 @@ export function HeaderSimple() {
           {items}
         </Group>
         <DarkMode />
-        {/* TODO: Update burger content in mobile view */}
         <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
       </Container>
+      { opened && (
+          <Stack className={classes.mobileMenu} hiddenFrom="xs">
+            {items}
+          </Stack>
+          )}
+      
     </header>
   );
 }
