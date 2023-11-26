@@ -55,7 +55,7 @@ export const Events = (): React.ReactElement => {
                                                     src={event.logo.url}
                                                     fallbackSrc={events_blank}
                                                     height={160}
-                                                    alt=""
+                                                    alt={`image banner for ${event.name.text}`}
                                                 />
                                             </Card.Section>
                                             <Group justify="space-between" mt="md" mb="xs">
@@ -106,7 +106,7 @@ export const Events = (): React.ReactElement => {
                                             src={event.logo.url}
                                             fallbackSrc={events_blank}
                                             height={160}
-                                            alt=""
+                                            alt={`dull banner for ${event.name.text}`}
                                             className={classes.dullImage}
                                         />
                                     </Card.Section>
