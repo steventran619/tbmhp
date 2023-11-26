@@ -59,7 +59,7 @@ export default function App() {
           </Center>
 
           <FooterLinks />
-        </MantineProvider>;
+        </MantineProvider>
       </Router>
     </QueryClientProvider>
   )
