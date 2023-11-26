@@ -18,7 +18,7 @@ export function HeroImageLeft() {
             <Title order={2}>
               Our Mission
             </Title>
-            <Text fw={500}>
+            <Text fw={500} style={{ textAlign: 'justify' }}>
               The mission of TBMHP is to provide funding for mental health services for low-income individuals and their families, either directly or through collaboration with other non-profit organizations. Provide academic scholarships for higher education to students pursuing careers in mental health or related fields. Provide research grants to accredited institutions for the purpose of mental health research including but not limited to medicinal research and clinical trials. Raise awareness about mental health care, research, services, support, educational resources, and public policy, especially as related to the needs of low-income individuals and their families. Advocate at the local, state, and/or national level in support of policies to improve the lives of individuals with mental health issues and their families.
             </Text>
           </Stack>
