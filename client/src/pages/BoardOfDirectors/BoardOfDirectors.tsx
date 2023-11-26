@@ -21,9 +21,9 @@ export const BoardOfDirectors = (): React.ReactElement => {
             <Text size="lg" fw={400} ta="center">Our team is a mix of Tom&#39;s family and friends that are committed to the success of TBMHP and the
                 mission that we strive to obtain.
             </Text>
-            <ProfileCard />
-            <ProfileCard />
-            <ProfileCard />
+            {profiles.map((person) => (
+                <ProfileCard key={person.name} {...person} />
+            ))}
         </div>
     );
 }

@@ -101,3 +101,9 @@ interface Pagination {
     has_more_items: boolean;
 }
 
+export interface Profile {
+    name: string;
+    title: string;
+    description: string;
+    image: string;
+}

@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Lori Batterman",
+        "title": "President",
+        "description": "Lori currently lives in Elkton and was married to Tom for 22 years. She is a mortgage advisor and is currently taking a leave to concentrate on the success of the Thomas Batterman Mental Health Project. She is also active in the community as a volunteer firefighter and works part-time at the local cafe. After watching Tom struggle for years with depression and substance abuse, she has made it her mission to bring some good out of Tom’s death.",
+        "image": "https://res.cloudinary.com/dews5utjs/image/upload/v1700983077/tbmhp_board/president_gk5en5.png"
+    },
+    {
+        "name": "Jessica Batterman",
+        "title": "Secretary ",
+        "description": "Jessica Batterman, Tom’s daughter, is a recent graduate of the University of Oregon with a Bachelor of Science in Physics and a minor in Climate Studies. Following her graduation, Jessica is working as a teaching assistant at the university. Jessica became passionate about improving access to mental health services and researching new therapies after witnessing her father’s struggles with depression and alcoholism. She is thrilled to have the opportunity to help individuals get the help they need through the Thomas Batterman Mental Health Project. Jessica currently lives in Eugene, Oregon with her cat Chase. She enjoys live music, baking, and many outdoor pursuits such as hiking, climbing, and trail running. ",
+        "image": "https://res.cloudinary.com/dews5utjs/image/upload/v1700983077/tbmhp_board/secretary_v88pkg.jpg" 
+    },
+    {
+        "name": "Casey Scofield",
+        "title": "Vice President ",
+        "description": "Casey Scofield, Tom’s stepson, is pursuing his JD (2025) at the University of North Carolina School of Law. After earning a Bachelor of Science in Political Science at the University of Oregon (2017), Casey joined the U.S. Navy as an intelligence officer, where he worked primarily at the Office of Naval Intelligence in Washington, D.C. It was during Casey’s time in the military that he first began advocating for better access to mental healthcare. After seeing the high number of veterans who struggled with mental health issues and the stigma associated with them seeking professional help, Casey became motivated to get involved with the Thomas Batterman Mental Health Project. Casey currently lives in Raleigh, North Carolina with his wife, Lauren, where they enjoy breweries, long hikes with their dog Tune, and Tarheel basketball.",
+        "image": "https://res.cloudinary.com/dews5utjs/image/upload/v1700983078/tbmhp_board/vice-president_hjfrsx.jpg" 
+    },
+    {
+        "name": "Hillel Hoffman",
+        "title": "Board Member",
+        "description": "After working for more than three decades in journalism and higher education, Hillel opened up an independent communications consultancy and college admissions counseling business in 2020. Originally from Ithaca, New York, where he was a high school friend of Tom Batterman, he now lives in Philadelphia with his wife, Sharon.",
+        "image": "https://res.cloudinary.com/dews5utjs/image/upload/v1700983077/tbmhp_board/board-hillel_finkjs.jpg" 
+    },
+    {
+        "name": "Richard Kiely",
+        "title": "Board Member",
+        "description": "Richard Kiely is the associate vice provost for engagement and land-grant affairs and the director of academic initiatives in the David M. Einhorn Center for Community Engagement at Cornell University. Richard was born and raised in Ithaca, NY. He is married to Andrea and they have two daughters, Eva (18) and Ana (13). Along with his passion for community engagement, he loves hiking in gorges and playing ice hockey. He was one of Tom’s best friends in high school.",
+        "image": "https://res.cloudinary.com/dews5utjs/image/upload/v1700984127/tbmhp_board/Richard-Kiely-e1687718264974_pnk2xq.jpg" 
+    },
+    {
+        "name": "Sandra Galli",
+        "title": "Board Member",
+        "description": "Sandra Galli lives in Elkton, Oregon. Elkton is a small, historic town, overlooking the beautiful Umpqua River and nestled in Oregon’s coastal mountains. Here Sandra enjoys a simple life where she is a city council member, works at a vineyard in the tasting room, is for hire as a professional gardener, and a first-year beekeeper. Sandra walks regularly along the side of the Umpqua River with a group of ladies and her German Shepherd. This is where she met Lori Batterman.\n\nSandra has never met Tom Batterman but has heard his life story through Lori Batterman. Lori found Tom to be “very intelligent, honest, athletic, and unique.” When Lori asked Sandra to join the Tom Batterman Mental Health Project, she accepted the position immediately. When Sandra was born, her father suffered a nervous breakdown and later was diagnosed with manic depressive disorder. She knows firsthand how debilitating mental health illnesses are. Sandra is committed to supporting the TBMHP.",
+        "image": "https://res.cloudinary.com/dews5utjs/image/upload/v1700983077/tbmhp_board/board-sandra_bavetk.jpg" 
+    }
+]
