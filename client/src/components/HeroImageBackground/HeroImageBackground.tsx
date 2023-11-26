@@ -4,11 +4,11 @@ import classes from './HeroImageBackground.module.css';
 export function HeroImageBackground() {
   return (
     <div className={classes.wrapper}>
-      <Overlay color="#000" opacity={0.65} zIndex={1} />
+      <Overlay color="#000" opacity={0.75} zIndex={1}/>
       <div className={classes.inner}>
       <Space h="xl" />
         <Title className={classes.title}>
-          This was Tom
+          About Tom
         </Title>
         <Container size={1280}>
           <Text fw={600} size="xl" className={classes.description}>
