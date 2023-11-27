@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Container, Group, Burger } from '@mantine/core';
+import { Container, Group, Burger, Stack } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import logoImage from '../../images/logo.png';
 import classes from './HeaderSimple.module.css';
@@ -9,7 +9,6 @@ import { DarkMode } from '../DarkMode/DarkMode';
 const links = [
   { link: '/', label: 'Home' },
   { link: '/aboutus', label: 'About Us' },
-  { link: '/abouttom', label: 'About Tom' },
   { link: '/boardofdirectors', label: 'Board of Directors' },
   { link: '/events', label: 'Events' },
   { link: '/gallery', label: 'Gallery' },
@@ -34,6 +33,7 @@ export function HeaderSimple() {
       to={link.link}
       className={`${classes.link} ${active === link.link ? "active" : ""}`}
       data-active={active === link.link || undefined} // used to highlight the active link
+      onClick={() => toggle()}
     >
       {link.label}
     </Link>
@@ -43,17 +43,21 @@ export function HeaderSimple() {
     <header className={classes.header}>
       <Container size="lg" className={classes.inner}>
         <Link to={'/'}>
-          {/* <Image src={logoImage} alt="logo" w="180" fit="contain" /> */}
-          <img src={logoImage} alt="logo" width="180"/>
+          <img src={logoImage} alt="tbmhp logo" width="180"/>
         </Link>
         <div className={classes.spacer} />
         <Group gap={5} visibleFrom="xs">
           {items}
         </Group>
         <DarkMode />
-        {/* TODO: Update burger content in mobile view */}
         <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
       </Container>
+      { opened && (
+          <Stack className={classes.mobileMenu} hiddenFrom="xs">
+            {items}
+          </Stack>
+          )}
+      
     </header>
   );
 }

@@ -6,6 +6,7 @@ import authRoute from './Routes/AuthRoute.mjs';
 import newsletterRoute from './Routes/NewsletterRoute.mjs';
 import instagramImages from './Routes/MediaRoutes.mjs';
 import UpdateMedia from './Controllers/InstagramController.mjs';
+import eventRoutes from './Routes/EventRoutes.mjs';
 
 
 dotenv.config();
@@ -29,6 +30,7 @@ app.use(cookieParser()); // Parse cookies for auth
 app.use("/admin", authRoute); // Admin routes
 app.use("/newsletter", newsletterRoute); // Admin routes
 app.use("/gallery", instagramImages); // Instagram routes)
+app.use("/events", eventRoutes);
 
 // Global error handling
 app.use((err, _req, res, next) => {

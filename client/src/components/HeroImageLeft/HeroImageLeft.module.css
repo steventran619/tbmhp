@@ -42,6 +42,7 @@
   
     @media (max-width: $mantine-breakpoint-md) {
       display: inline-block;
+      max-width: 100%; /* Adjust this value */
     }
   }
   
