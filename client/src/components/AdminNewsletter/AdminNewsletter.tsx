@@ -17,7 +17,6 @@ import { IconCopy, IconCheck, IconSelector, IconChevronDown, IconChevronUp, Icon
 import classes from './AdminNewsletter.module.css';
 
 interface RowData {
-  id: string;
   firstname: string;
   lastname: string;
   active: boolean;
@@ -145,7 +144,6 @@ const AdminHome = (): React.ReactElement => {
 
   const rows = sortedData.map((row) => (
     <Table.Tr key={row.email}>
-      <Table.Td>{row.id}</Table.Td>
       <Table.Td>{row.firstname}</Table.Td>
       <Table.Td>{row.lastname}</Table.Td>
       <Table.Td>{row.email}</Table.Td>
@@ -159,7 +157,6 @@ const AdminHome = (): React.ReactElement => {
     
     // Map the data to conform to the RowData structure
     return data.map((subscriber: any) => ({
-      id: subscriber._id, // Adjust this line to map _id to id
       firstname: subscriber.firstname,
       lastname: subscriber.lastname,
       email: subscriber.email,
@@ -221,13 +218,6 @@ const AdminHome = (): React.ReactElement => {
       <Table horizontalSpacing="md" verticalSpacing="xs" miw={700} layout="fixed">
         <Table.Tbody>
           <Table.Tr>
-            <Th
-              sorted={sortBy === 'id'}
-              reversed={reverseSortDirection}
-              onSort={() => setSorting('id')}
-            >
-              id
-            </Th>
             <Th
               sorted={sortBy === 'firstname'}
               reversed={reverseSortDirection}
