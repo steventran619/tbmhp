@@ -1,14 +1,18 @@
 .admin_container {
-  width: 95vw;
+  width: 100vw;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: start;
   gap: 2rem;
 }
 .admin_container > :first-child {
-  flex-basis: 300px;
+  flex-basis: 20%;
+  max-width: 300px;
+  min-width: 300px;
 }
 .admin_container> :last-child {
   flex-grow: 1;
+  padding: 1rem;
 }
 .admin_page {
   margin: 0 20px;
@@ -49,4 +53,17 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+
+/* Responsive Design - Example */
+@media screen and (max-width: 768px) {
+  .admin_container {
+    flex-direction: column;
+  }
+
+  .admin_container> :first-child,
+  .admin_container> :last-child {
+    flex-basis: auto;
+    max-width: none;
+  }
 }
