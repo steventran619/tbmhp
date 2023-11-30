@@ -1,4 +1,5 @@
 import React from 'react';
+import classes from './AdminHome.module.css';
 
 type AdminHomeProps = {
   username: string;
@@ -6,7 +7,7 @@ type AdminHomeProps = {
 
 const AdminHome: React.FC<AdminHomeProps> = ({ username }): React.ReactElement => {
   return (
-    <h4>Welcome <span>{username}</span></h4>
+    <h4 className={classes.homeText}>Welcome <span>{username}</span></h4>
   );
 };
 
