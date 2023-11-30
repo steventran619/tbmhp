@@ -178,7 +178,7 @@ const AdminHome = (): React.ReactElement => {
 
   return (
     <>
-      <h4>Newsletter Admin Settings</h4>
+      <h4 className={classes.heading}>Newsletter Admin Settings</h4>
       <Tooltip
         label="Subscriber Emails copied!"
         offset={5}

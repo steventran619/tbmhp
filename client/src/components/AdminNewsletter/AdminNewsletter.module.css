@@ -16,3 +16,7 @@
   height: rem(21px);
   border-radius: rem(21px);
 }
+
+.heading {
+  color: light-dark(var(--mantine-color-black), var(--mantine-color-gray-0));
+}
