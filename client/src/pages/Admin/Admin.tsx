@@ -59,7 +59,6 @@ export const Admin: FC = () => {
           <Route path="" element={<AdminHome username={username}/>}/>
           <Route path="/newsletter" element={<AdminNewsletter />}/>
         </Routes>
-        
       </div>
       
     </div>

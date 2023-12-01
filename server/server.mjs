@@ -23,7 +23,7 @@ app.use(cors({
         "https://steventran619.github.io/tbmhp",
         "https://main.d2g07unwlxox5e.amplifyapp.com"
     ],
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
     credentials: true,
 })); // so the frontend can talk to the backend
 app.use(cookieParser()); // Parse cookies for auth

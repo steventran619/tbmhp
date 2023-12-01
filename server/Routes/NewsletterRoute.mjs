@@ -1,6 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import { Signup, Unsubscribe, Verify, SendUnsubscribeToken, GetSubscribers } from '../Controllers/NewsletterController.mjs';
+import { Signup, Unsubscribe, Verify, SendUnsubscribeToken, GetSubscribers, DeleteSubscriber, ToggleActivation } from '../Controllers/NewsletterController.mjs';
 import { createNewsletterSubscriberModel } from '../Models/NewsletterModel.mjs';
 
 const mongodbNewsletterConnectString = process.env.MONGODB_NEWSLETTER_CONNECT_STRING;
@@ -44,4 +44,29 @@ router.get('/subscribers', async (req, res) => {
   return res.json(data);
 });
 
+router.delete('/subscribers/:id', async (req, res, next) => {
+  try {
+    const result = await DeleteSubscriber(NewsletterSubscriber, req.params.id);
+    if (result.success) {
+      res.status(204).send()
+    }
+  } catch (error) {
+    const message = error.message;
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+router.patch('/subscribers/:id/activate', async (req, res, next) => {
+  try {
+    const subscriber = await ToggleActivation(NewsletterSubscriber, req.params.id);
+    if (subscriber) {
+      res.status(200).json(subscriber)
+    } else {
+      res.status(404).send('Subscriber not found');
+    }
+  } catch (error) { 
+    const message = error.message;
+    res.status(500).send(message);
+  }
+});
 export default router;

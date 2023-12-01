@@ -1,0 +1,3 @@
+.homeText {
+  color: light-dark(var(--mantine-color-black), var(--mantine-color-gray-0));
+}
