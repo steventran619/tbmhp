@@ -38,7 +38,6 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links }: LinksG
       );
     }
   });
-  console.log(items);
   return (
     <>
       <UnstyledButton onClick={() => setOpened((o) => !o)} className={classes.control}>

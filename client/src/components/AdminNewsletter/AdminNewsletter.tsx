@@ -11,12 +11,24 @@ import {
   Center,
   TextInput,
   rem, 
+  Menu,
+  ActionIcon
 } from '@mantine/core';
+import {
+  IconPencil,
+  IconMessages,
+  IconNote,
+  IconReportAnalytics,
+  IconTrash,
+  IconDots,
+} from '@tabler/icons-react';
 import { useClipboard } from '@mantine/hooks';
 import { IconCopy, IconCheck, IconSelector, IconChevronDown, IconChevronUp, IconSearch } from '@tabler/icons-react';
 import classes from './AdminNewsletter.module.css';
+import { toast } from "react-toastify";
 
 interface RowData {
+  id: string;
   firstname: string;
   lastname: string;
   active: boolean;
@@ -107,6 +119,7 @@ function sortData(
 
   return result;
 }
+
 const AdminHome = (): React.ReactElement => {
   const [search, setSearch] = useState('');
   const [subscribers, setSubscribers] = useState<RowData[]>([]);
@@ -148,6 +161,39 @@ const AdminHome = (): React.ReactElement => {
       <Table.Td>{row.lastname}</Table.Td>
       <Table.Td>{row.email}</Table.Td>
       <Table.Td>{row.active ? 'Active' : 'Inactive'}</Table.Td>
+      <Table.Td>
+        <Group gap={0} justify="flex-end">
+          <Menu
+            transitionProps={{ transition: 'pop' }}
+            withArrow
+            position="bottom-end"
+            withinPortal
+          >
+            <Menu.Target>
+              <ActionIcon variant="subtle" color="gray">
+                <IconDots style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
+              </ActionIcon>
+            </Menu.Target>
+            <Menu.Dropdown>
+              <Menu.Item
+                onClick={() => toggleSubscriberStatus(row.id)}
+                leftSection={
+                  <IconReportAnalytics style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
+                }
+              >
+                Activate/Inactivate
+              </Menu.Item>
+              <Menu.Item
+                onClick={() => deleteSubscriber(row.id)}
+                leftSection={<IconTrash style={{ width: rem(16), height: rem(16) }} stroke={1.5} />}
+                color="red"
+              >
+                Delete Subscriber
+              </Menu.Item>
+            </Menu.Dropdown>
+          </Menu>
+        </Group>
+      </Table.Td>
     </Table.Tr>
   ));
 
@@ -157,6 +203,7 @@ const AdminHome = (): React.ReactElement => {
     
     // Map the data to conform to the RowData structure
     return data.map((subscriber: any) => ({
+      id: subscriber._id,
       firstname: subscriber.firstname,
       lastname: subscriber.lastname,
       email: subscriber.email,
@@ -175,6 +222,51 @@ const AdminHome = (): React.ReactElement => {
       console.error('Failed to fetch or copy subscribers: ', error);
     }
   }
+
+  const handleError = (err: string) => {
+    console.log(err);
+    toast.error(err, {
+      position: "bottom-left",
+    });
+  };
+
+  const handleSuccess = (msg: string) => {
+    toast.success(msg, {
+      position: "bottom-left",
+    });
+  };
+
+  const deleteSubscriber = async (idToDelete: string) => {
+    try {
+      const response = await axios.delete(`${import.meta.env.VITE_REACT_APP_API_URL}/newsletter/subscribers/${idToDelete}`);
+      if (response.status === 204) {
+        const updatedSubscribers = subscribers.filter(subscriber => subscriber.id !== idToDelete)
+        setSubscribers(updatedSubscribers);
+        setSortedData(sortData(updatedSubscribers, {sortBy, reversed: reverseSortDirection, search }));
+        handleSuccess('Subscriber successfully deleted');
+      }
+      
+      } catch (error) {
+        console.error('Error deleting subscriber:', error);
+        handleError('Error deleting subscriber');
+      }
+  }
+  const toggleSubscriberStatus = async (id: string) => {
+    try {
+      const response = await axios.patch(`${import.meta.env.VITE_REACT_APP_API_URL}/newsletter/subscribers/${id}/activate`);
+      if (response.status === 200) {
+        const updatedSubscribers = subscribers.map(subscriber => 
+          subscriber.id === id ? { ...subscriber, active: !subscriber.active } : subscriber
+        );
+        setSubscribers(updatedSubscribers);
+        setSortedData(sortData(updatedSubscribers, { sortBy, reversed: reverseSortDirection, search }));
+        handleSuccess('Subscriber activation toggled');
+      }
+    } catch (error) {
+      console.error('Error toggling subscriber status:', error);
+      handleError('Error toggling subscriber status');
+    }
+  };
 
   return (
     <>
@@ -199,7 +291,7 @@ const AdminHome = (): React.ReactElement => {
         radius="xl"
         size="md"
         styles={{
-          root: { paddingRight: rem(14), height: rem(48) },
+          root: { paddingRight: rem(14), height: rem(48), marginBottom: rem(22) },
           section: { marginLeft: rem(22) },
         }}
         onClick={handleCopyClick}
@@ -207,6 +299,7 @@ const AdminHome = (): React.ReactElement => {
         Copy Subscribers to clipboard
       </Button>
     </Tooltip>
+    <h4 className={classes.heading}>Subscribers</h4>
     <ScrollArea>
       <TextInput
         placeholder="Search by any field"

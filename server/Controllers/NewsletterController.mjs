@@ -43,7 +43,7 @@ export async function Signup(NewsletterSubscriber, req, res, next) {
     next();
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Internal Server Error" }); // Internal Server Error
+    res.status(500).json({ message: "Internal Server Error" }); 
   }
 }
 
@@ -148,7 +148,6 @@ export async function Unsubscribe(NewsletterSubscriber, token) {
 
     return { success: true };
   } catch (error) {
-    // Log the error and rethrow it
     console.error(error);
     throw error;
   }
@@ -164,4 +163,31 @@ export async function GetSubscribers(NewsletterSubscriber, req, res, next) {
   }
   return documents;
   
+}
+
+export async function DeleteSubscriber(NewsletterSubscriber, id) {
+  try {
+    const result = await NewsletterSubscriber.findByIdAndRemove(id);
+    return {success:true}
+  } catch (error) {
+    console.error('Error deleting subscriber:', error);
+    return {success:false};
+  }
+}
+
+export async function ToggleActivation(NewsletterSubscriber, id) {
+  try {
+    const subscriber = await NewsletterSubscriber.findById(id);
+
+    if (subscriber) {
+      subscriber.active = !subscriber.active;
+      await subscriber.save();
+      return subscriber;
+    } else {
+      return null;
+    }
+  } catch (error) { 
+    console.error(error);
+    throw error;
+  }
 }
